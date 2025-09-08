@@ -1,0 +1,112 @@
+[
+  {
+    "id": 111111,
+    "first_name": "solomon",
+    "last_name": "tihi@gmail.com",
+    "email": "solubman28@gmail.com",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$AELLscB2XVXJZiuva8MxGQ$dDnOVyv1TAPn5J/dOKYUE1diMXb7VpBtHaM6R1yPsWk",
+    "role": "admin"
+  },
+  {
+    "id": 111112,
+    "name": "solomon",
+    "email": "solubman28@gmail.com",
+    "password": "1122233333",
+    "role": "admin"
+  },
+  {
+    "id": "40f6187d-fb7d-4412-8efb-6227d3c22473",
+    "first_name": "tihitnaw1",
+    "last_name": "tihi@gmail.com",
+    "email": "tihi@gmail.com",
+    "password": "112233",
+    "role": "user"
+  },
+  {
+    "id": "c3618ca8-89fd-44bd-8dba-073baebceb87",
+    "first_name": "tihi@",
+    "last_name": "ss",
+    "email": "ss",
+    "password": "ss"
+  },
+  {
+    "id": "2b1b9b8a-7ae9-4e5d-be55-ddccc1242a67",
+    "first_name": "eden",
+    "last_name": "mekonen",
+    "email": "eden@gmaa.com",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$LGpqcJa1cwFH0wSi9bSy8w$l3QpAy3EB5sHIKpiNdj2OA2AUERt20ZwZcOJlCLjEVc",
+    "role": "user"
+  },
+  {
+    "id": "7acb25a3-61a2-44bb-9266-c879e1c554ed",
+    "first_name": "eden",
+    "last_name": "mekonen",
+    "email": "eden@gmail.com",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$0UxCYvUUeS933PfjhJ3D4A$Gx4yvMI3RSaum+o9wO4xnz1tGTnpQGKEivfDRd46u3I",
+    "role": "user"
+  },
+  {
+    "id": "0632dfce-27b8-4512-8be9-740372885250",
+    "first_name": "edenawit",
+    "last_name": "mekonen",
+    "email": "edenawitwwww@gmail.com",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$qY82AFeoHqhwS2EVOK0jNQ$uyHFjEgv9ksoRVV9wAc1riq80G3IfrdCKKMGOvPXabw",
+    "role": "user"
+  },
+  {
+    "id": "38131048-a485-4bd7-8680-117046f4cda0",
+    "first_name": "edenawit",
+    "last_name": "mekonen",
+    "email": "edenawit@gmail.com",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$ScrtJCwpb08gokItwQCYag$LK/SeB4HpHUknzUIY452FRTBajx/DGAhFtKJgAvKjSw",
+    "role": "user"
+  },
+  {
+    "id": "5590b5b3-961f-49e4-b536-e515241f8760",
+    "first_name": "edenawit",
+    "last_name": "mekonen",
+    "email": "edenawitq@gmail.com",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$rLvk2/nK+wd6rjc2E+rGpw$rKmjpW3eXMsMf7FV3vJsR0+NEqyDnvGR7DrZovkaf9U",
+    "role": "user"
+  },
+  {
+    "id": "95d14cbb-2887-416e-afa5-9607f0093d1d",
+    "first_name": "edenawit",
+    "last_name": "mekonen",
+    "email": "edenawitss@gmail.com",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$6pmay4cEGAxzBxN5hpqolg$1GYkq5gmfosX6/4uCCO6841aNyOvhXNsUQB9YQhXlvU",
+    "role": "user"
+  },
+  {
+    "id": "308a1165-38ad-4e31-8331-11e5b536abdf",
+    "first_name": "edenawit",
+    "last_name": "mekonen",
+    "email": "edenawits@gmail.com",
+    "password": "1234567",
+    "role": "user"
+  },
+  {
+    "id": "82d067c3-6743-4c42-9724-ae6313e19d06",
+    "first_name": "amanuel",
+    "last_name": "moha",
+    "email": "amanuel@gmail.com",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$gxTvKRO06QA1b+YIHJ1Y/w$ENZTYGK9vpkEGNqqfKyYrjFR2uB/K1OzDIbaYJrD3+o",
+    "role": "user"
+  },
+  {
+    "id": "5ead88aa-1d34-4fdf-b5cc-dd4302d9a442",
+    "first_name": "abdisa",
+    "last_name": "moha",
+    "email": "abdisa@gmail.com",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$J3PVfxNZ1KtqouqlpMUcGQ$/40RNQsiMys2A0dg+km7jVJ+Oqc9FE8Zj9szFcXdxvg",
+    "role": "user"
+  },
+  {
+    "id": "55ec7472-6178-41a4-97db-d0fa0d3450e8",
+    "first_name": "abdisa",
+    "last_name": "moha",
+    "email": "abdisa@gmailll.com",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$pbbvFsjJSPrHGWrF8ymBCg$9ehlsKguW5vKRzTUdJaS8IaWMCxIKzeHNKmDIh2ku6s",
+    "role": "user"
+  }
+]

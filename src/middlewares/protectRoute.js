@@ -1,14 +1,13 @@
 import jwt from "jsonwebtoken";
-import { getUserByIdService } from "../service/userService.js";
+import { getUserByIdService } from "../services/userService.js";
 
 
 const protectRoute = async (req, res, next) => {
   try {
     const token = req.headers.authorization?.split(" ")[1];
-    if (!token) {
+    if (!token || token ==="null") {
       return res.status(401).json({ error: "Unauthorized - No token provided" });
     }
-    
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     const user = await getUserByIdService(decoded.userId);
