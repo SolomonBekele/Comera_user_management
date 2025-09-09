@@ -1,13 +1,13 @@
 import Joi from "joi"
 
 const userCreateScheme = Joi.object({
-  first_name: Joi.string().min(3).required(),
-  last_name:Joi.string(),
-  password:Joi.string().required(),
+  first_name: Joi.string().required(),
+  last_name:Joi.string().required(),
   email: Joi.string().email().required(),
+  password:Joi.string().min(6).required(),
 });
 const loginScheme = Joi.object({
-  password:Joi.string().required(),
+  password:Joi.string().min(6).required(),
   email: Joi.string().email().required(),
 });
 

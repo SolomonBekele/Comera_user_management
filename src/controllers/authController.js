@@ -18,7 +18,7 @@ export const signUp = async (req, res, next) => {
   try {
 
 
-    const createdUser = await createUserService(first_name,last_name,email,hashedPassword,"user");
+    const createdUser = await createUserService(first_name,last_name,email,hashedPassword);
     
     const { password, ...userWithoutPassword } = createdUser;
 

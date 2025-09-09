@@ -8,7 +8,7 @@ export const getAllUsersService = async () => {
         const usersData = await readUsersFile()
         return JSON.parse(usersData)
       } catch (err) {
-          throw new Error("error in fileHandler: " + err.message)
+          throw new Error("error on getAllUserService: " + err.message)
       }
 };
 export const getUserByIdService = async (id) => {
@@ -24,23 +24,24 @@ export const getUserByIdService = async (id) => {
 };
 export const getUserByEmailService = async (email) => {
   try {
-        const usersData = await readUsersFile();    
+        const usersData = await readUsersFile();
         const parsedUsers = JSON.parse(usersData)
         const fetchedUser = parsedUsers.find(user=>user.email == email)   
         return fetchedUser;    
       } catch (err) {
-          throw new Error("error on getUserByIdService " + err.message)
+          throw new Error("error on getUserByEmailService " + err.message)
       }
   
-};
-export const createUserService = async ( first_name,last_name, email, password, role) => {
+};``
+export const createUserService = async ( first_name,last_name, email, password) => {
     try{
         const usersData = await readUsersFile()
         const parsedUsers = JSON.parse(usersData)
 
-        const id =uuidv4(); 
-
-        const newUser = new User(id, first_name, last_name,email, password, role);
+        const id = uuidv4();
+        const role = "user";
+        const created_at = new Date()
+        const newUser = new User(id, first_name, last_name,email, password, role,created_at);
         parsedUsers.push({...newUser});
         const newUsers = JSON.stringify(parsedUsers, null, 2);
         await writeUsersFile(newUsers)
