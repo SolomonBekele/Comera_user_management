@@ -35,7 +35,6 @@ export const getUserById = async (req,res,next) =>{
                 message:`user not found with id ${id}`
             })
         }
-        console.log(password1);
         const {password,...userWithoutPassword} = user
         res.status(200).json({
             success:true,
