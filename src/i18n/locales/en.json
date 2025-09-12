@@ -1,0 +1,71 @@
+{
+  "PAGE_NOT_FOUND":"Page not found",
+  "INTERNAL_SERVER_ERROR": "Something went wrong, please try again later.",
+  "FORBIDDEN_ACCESS": "Forbidden, you are not allowed to access this service",
+  "UNAUTHORIZED_NO_TOKEN": "Unauthorized - No token provided",
+  "INVALID_TOKEN_OR_USER": "User not found or invalid token",
+  
+  "BOOK": {
+    "INVALID_OBJECT": "Invalid book object",
+    "CONFLICT_ISBN": "Book with isbn {{isbn}} already exist",
+    "NOT_FOUND_ID": "Book with Id {{id}} not found",
+    "NOT_FOUND_ISBN": "Book with Isbn {{isbn}} not found",
+    "CREATED": "New book has been created successfully",
+    "RETRIEVED_BY_ID": "Book with ID {{id}} retrieved successfully",
+    "RETRIEVED_BY_ISBN": "Book with isbn {{isbn}} retrieved successfully",
+    "RETRIEVED_ALL": "Total {{count}} books retrieved successfully",
+    "UPDATED": "Book with ID {{id}} updated successfully",
+    "DELETED": "Books with ID {{id}} deleted successfully",
+    "VALIDATION": {
+      "TITLE_REQUIRED": "Title is required",
+      "AUTHOR_ARRAY": "Author must be an array of strings",
+      "AUTHOR_MIN": "At least one author is required",
+      "ISBN_REQUIRED": "ISBN is required",
+      "PUBLICATIONDATE_INVALID": "Publication date must be a valid date",
+      "PUBLICATIONDATE_REQUIRED": "Publication date is required",
+      "PUBLISHER_REQUIRED": "Publisher is required",
+      "GENRE_REQUIRED": "Genre is required",
+      "LANGUAGE_INVALID": "Language must be English, Amharic, or Arabic",
+      "LANGUAGE_REQUIRED": "Language is required"
+    }
+  },
+
+  "USER": {
+    "INVALID_OBJECT": "Invalid user object",
+    "CONFLICT_EMAIL": "User with email {{email}} already exist",
+    "NOT_FOUND_ID": "User with Id {{id}} not found",
+    "NOT_FOUND_EMAIL": "User with Email {{email}} not found",
+    "PENDING_APPROVAL": "User with Email {{email}} is pending approval by admin",
+    "INVALID_CREDENTIALS": "Invalid credentials",
+    "CREATED": "New user has been created successfully",
+    "RETRIEVED_BY_ID": "User with ID {{id}} retrieved successfully",
+    "RETRIEVED_BY_EMAIL": "User with email {{email}} retrieved successfully",
+    "RETRIEVED_ALL": "Total {{count}} users retrieved successfully",
+    "UPDATED": "User with ID {{id}} updated successfully",
+    "DELETED": "User with ID {{id}} deleted successfully",
+    "VALIDATION": {
+      "FIRST_NAME_REQUIRED": "First name is required",
+      "LAST_NAME_REQUIRED": "Last name is required",
+      "EMAIL_REQUIRED": "Email is required",
+      "EMAIL_INVALID": "Email is invalid",
+      "PASSWORD_REQUIRED": "Password is required",
+      "PASSWORD_MIN": "Password must be at least 6 characters long",
+      "ROLE_REQUIRED": "Role is required",
+      "ROLE_INVALID": "Role must be user or librarian",
+      "LANGUAGE_REQUIRED": "Language is required",
+      "LANGUAGE_INVALID": "Language must be am, en, or ar"
+    }
+  },
+  "LIBRARIAN":{
+    "LIBRARIAN_PENDING": "Librarian is in pending state",
+    "LIBRARIAN_NOT_VERIFIED": "Librarian is not verified"
+  },
+  "VALIDATION": {
+    "FIRST_NAME_REQUIRED": "First name is required",
+    "LAST_NAME_REQUIRED": "Last name is required",
+    "EMAIL_INVALID": "Invalid email address",
+    "PASSWORD_MIN": "Password must be at least 6 characters long",
+    "ROLE_INVALID": "Role must be user or librarian",
+    "LANGUAGE_INVALID": "Language must be am, en, or ar"
+  }
+}

@@ -5,6 +5,8 @@ const userCreateScheme = Joi.object({
   last_name:Joi.string().required(),
   email: Joi.string().email().required(),
   password:Joi.string().min(6).required(),
+  role:Joi.string().min(4).required().valid("user", "librarian,USER,LIBRARIAN"),
+  language:Joi.string().min(2).required().valid("am","en","ar")
 });
 const loginScheme = Joi.object({
   password:Joi.string().min(6).required(),

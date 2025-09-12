@@ -1,5 +1,5 @@
 import argon2 from "argon2";
-import { changePasswordService, deleteUserService, getAllUsersService, getUserByEmailService, getUserByIdService, updateUserService } from "../services/userService.js";
+import { changeLibrarianStatusService, changePasswordService, deleteUserService, getAllUsersService, getUserByIdService, getUsersByRoleService, updateUserService } from "../services/userService.js";
 
 
 
@@ -28,6 +28,30 @@ export const getAllUsers = async (req,res,next) =>{
 export const getUserById = async (req,res,next) =>{
     try{
         const id = req.params.id;
+        const user = await getUserByIdService(id);
+        if(!user){
+            return res.status(404).json({
+                success:true,
+                message:`user not found with id ${id}`
+            })
+        }
+        const {password,...userWithoutPassword} = user
+        res.status(200).json({
+            success:true,
+            message:"user fetched successfully",
+            data:userWithoutPassword
+        })
+    }catch(err){
+        console.log("fetch user data error occured", err);
+        res.status(500).json({
+        success: false,
+        message: "Internal server error",
+    });
+    }
+}
+export const getUserByToken = async (req,res,next) =>{
+    try{
+        const id = req.user.id;
         const user = await getUserByIdService(id);
         if(!user){
             return res.status(404).json({
@@ -128,5 +152,53 @@ export const changePassword = async (req,res,next) =>{
     });
     }
 }
+
+export const changeLibrarianStatus = async (req, res) => {
+  try {
+    const { id } = req.params;   
+    const { status } = req.body;
+
+    const result = await changeLibrarianStatusService(id, status);
+
+    if (result) {
+      return res.status(200).json({
+        message: `Librarian status updated successfully to "${status}".`,
+      });
+    } else {
+      return res.status(404).json({
+        message: "Librarian not found.",
+      });
+    }
+  } catch (err) {
+    return res.status(500).json({
+      message: "Error updating librarian status.",
+      error: err.message,
+    });
+  }
+};
+
+export const getUserByRole = async (req, res) => {
+  try {
+    const { role } = req.params; 
+
+    const users = await getUsersByRoleService(role);
+
+    if (users.length === 0) {
+      return res.status(404).json({ message: `No users found with role: ${role}` });
+    }
+    const usersWithoutPasswords = users.map(({ password, ...rest }) => rest);
+    return res.status(200).json({
+      success:true,
+      message: `Users with role: ${role}`,
+      data: usersWithoutPasswords,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: "Error fetching users by role.",
+      error: err.message,
+    });
+  }
+};
+
 
 
