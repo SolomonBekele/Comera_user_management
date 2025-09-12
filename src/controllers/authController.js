@@ -1,6 +1,7 @@
-import { createUserService, getUserByEmailService } from "../services/userService.js";
+import { getUserByEmailService } from "../services/userService.js";
 import argon2 from "argon2"
-import generateToken from "../utils/generateToken.js";
+import {generateAccessToken,generateRefreshToken,verifyToken} from "../utils/generateToken.js";
+import { signUpService } from "../services/authService.js";
 
 
 export const signUp = async (req, res, next) => {
@@ -9,6 +10,8 @@ export const signUp = async (req, res, next) => {
       last_name,
       password,
       email,
+      role,
+      language
     } = req.body;
     const hashedPassword = await argon2.hash(password);
     const user = await getUserByEmailService(email);
@@ -16,9 +19,12 @@ export const signUp = async (req, res, next) => {
       return res.status(400).json({ error: "email already exists" });
     }
   try {
+    let role1 = role.toUpperCase()
+    let status = ""
+    if(role1 === "LIBRARIAN") status = "PENDING"
+    else status = "APPROVED"
 
-
-    const createdUser = await createUserService(first_name,last_name,email,hashedPassword);
+    const createdUser = await signUpService(first_name,last_name,email,hashedPassword,role1,language,status);
     
     const { password, ...userWithoutPassword } = createdUser;
 
@@ -42,22 +48,28 @@ export const login = async (req, res) => {
         const  {email} = req.body;
 
         const user = await getUserByEmailService(email);
+        if (!user) {
+          return res
+            .status(400)
+            .json({ error: "email or password not correct" });
+        }
 
-
-        const isPasswordCorrect = await argon2.verify(user.password,req.body.password)
+        const isPasswordCorrect = await argon2.verify(user?.password,req.body.password)
 
         if (!user || !isPasswordCorrect  ) {
-            return res.status(400).json({ error: "Username or password not correct" });
+            return res.status(400).json({ error: "email or password not correct" });
         }
 
         const { password, ...userWithoutPassword } = user;
-        const token = generateToken(user.id)
-
+        const token = generateAccessToken(user.id,user.language)
+      
+        const refreshToken = generateRefreshToken(user.id,user.languagex);
         res.status(200).json({
             success: true,
             message: "you are Logged successfully",
             id:user.id,
             token,
+            refreshToken,
           });
 
     } catch (error) {
@@ -68,4 +80,15 @@ export const login = async (req, res) => {
 export const logout = (req, res) => {
 
   res.json({ message: "Logged out successfully." });
+};
+
+export const refreshToken =  (req, res) => {
+  const token = req.body.refreshToken;
+  if (!token) return res.status(401).json({ message: "No token provided" });
+
+  const payload = verifyToken(token, process.env.REFRESH_SECRET);
+  if (!payload) return res.status(403).json({ message: "Invalid token" });
+
+  const newAccessToken = generateAccessToken(payload.userId);
+  res.json({ token: newAccessToken });
 };

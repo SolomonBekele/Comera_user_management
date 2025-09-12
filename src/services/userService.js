@@ -1,6 +1,5 @@
-import fs from "fs/promises"
 import { v4 as uuidv4 } from 'uuid';
-import { readUsersFile,writeUsersFile } from "../config/userFileHanler.js";
+import { readUsersFile,writeUsersFile } from "../config/userConfig/userFileHanler.js";
 import User from "../model/usersModel.js";
 
 export const getAllUsersService = async () => {
@@ -20,7 +19,6 @@ export const getUserByIdService = async (id) => {
       } catch (err) {
           throw new Error("error on getUserByIdService " + err.message)
       }
-  
 };
 export const getUserByEmailService = async (email) => {
   try {
@@ -33,24 +31,6 @@ export const getUserByEmailService = async (email) => {
       }
   
 };``
-export const createUserService = async ( first_name,last_name, email, password) => {
-    try{
-        const usersData = await readUsersFile()
-        const parsedUsers = JSON.parse(usersData)
-
-        const id = uuidv4();
-        const role = "user";
-        const created_at = new Date()
-        const newUser = new User(id, first_name, last_name,email, password, role,created_at);
-        parsedUsers.push({...newUser});
-        const newUsers = JSON.stringify(parsedUsers, null, 2);
-        await writeUsersFile(newUsers)
-        return newUser;
-    }
-    catch(err){
-        throw new Error("error on createUserService " + err)
-    }
-};
 export const updateUserService = async (id,first_name,last_name,) => {
   try{
         const usersData = await readUsersFile()
@@ -67,7 +47,7 @@ export const updateUserService = async (id,first_name,last_name,) => {
         return fetchedIndex;
     }
     catch(err){
-        throw new Error("error on createUserService " + err)
+        throw new Error("error on update UserService " + err)
     }
 };
 export const deleteUserService = async (id) => {
@@ -84,7 +64,7 @@ export const deleteUserService = async (id) => {
         return fetchedIndex;
     }
     catch(err){
-        throw new Error("error on createUserService " + err)
+        throw new Error("error on delete UserService " + err)
     }
 };
 export const changePasswordService = async (id,password) => {
@@ -98,6 +78,33 @@ export const changePasswordService = async (id,password) => {
         return true;
     }
     catch(err){
-        throw new Error("error on createUserService " + err)
+        throw new Error("error on change password Service " + err)
     }
+};
+export const changeLibrarianStatusService = async (id,status) => {
+  try{
+        const usersData = await readUsersFile()
+        const parsedUsers = JSON.parse(usersData)
+        const fetchedIndex = parsedUsers.findIndex(user=>user.id == id) 
+        parsedUsers[fetchedIndex]['status'] = status.toUpperCase();
+        const newUsers = JSON.stringify(parsedUsers, null, 2);
+        await writeUsersFile(newUsers)
+        return true;
+    }
+    catch(err){
+        throw new Error("error on change librarian status UserService " + err)
+    }
+};
+export const getUsersByRoleService = async (role) => {
+  try {
+    const usersData = await readUsersFile();
+    const parsedUsers = JSON.parse(usersData);
+
+    // Filter users by role
+    const filteredUsers = parsedUsers.filter(user => user.role === role);
+
+    return filteredUsers;
+  } catch (err) {
+    throw new Error("Error in getUserByRoleService: " + err.message);
+  }
 };

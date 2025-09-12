@@ -2,6 +2,8 @@ import express from 'express'
 import dotenv from 'dotenv';
 import userRoute from "./routes/userRoutes.js";
 import authRoute from "./routes/authRoutes.js";
+import bookRoute from "./routes/bookRoutes.js"
+import i18n from './i18n/langConfig.js';
 
 
 dotenv.config();
@@ -10,11 +12,13 @@ const app = express()
 
 app.use(express.json())
 
+
 app.use("/api/user",userRoute)
 app.use("/api/auth",authRoute)
-
+app.use('/api/book',bookRoute)
+i18n.setLocale("en")
 app.use((req, res, next) => {
-    res.status(404).json({ message: "Page Not Found" });
+    res.status(404).json({ message: i18n.__("PAGE_NOT_FOUND") });
 });
 
 const PORT = process.env.PORT

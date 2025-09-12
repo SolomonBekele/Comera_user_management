@@ -1,0 +1,15 @@
+[
+  {
+    "id": "9511d3b3-a38e-416a-a993-8b39cc610e28",
+    "title": "The Pragmatic Programmer",
+    "author": [
+      "Andrew Hunt",
+      "David Thomas"
+    ],
+    "isbn": "978-0201616224",
+    "publicationDate": "1999-10-20",
+    "publisher": "Addison-Wesley Professional",
+    "genre": "Software Development",
+    "language": "English"
+  }
+]

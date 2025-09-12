@@ -1,0 +1,72 @@
+{
+  "PAGE_NOT_FOUND": "ገጽ አልተገኘም",
+  "INTERNAL_SERVER_ERROR": "አንዳንድ ስህተት ተፈጥሯል፣ እባክዎ ከኋላ ደግሞ ይሞክሩ",
+  "FORBIDDEN_ACCESS": "ክልክል ነው፣ ይህን አገልግሎት ለመጠቀም ፍቃድ የሎትም",
+  "UNAUTHORIZED_NO_TOKEN": "ያልተፈቀደ - ምንም ቶከን አልቀረበም",
+  "INVALID_TOKEN_OR_USER": "ተጠቃሚው አልተገኘም ወይም ቶከኑ ልክ አይደለም",
+
+  "BOOK": {
+    "INVALID_OBJECT": "የተሳሳተ መጽሐፍ ነገር",
+    "CONFLICT_ISBN": "የ {{isbn}} አይነት መጽሐፍ ከዚህ በፊት አለ",
+    "NOT_FOUND_ID": "የ ID {{id}} መጽሐፍ አልተገኘም",
+    "NOT_FOUND_ISBN": "የ ISBN {{isbn}} መጽሐፍ አልተገኘም",
+    "CREATED": "አዲስ መጽሐፍ በተሳካ ሁኔታ ተፈጥሯል",
+    "RETRIEVED_BY_ID": "የ ID {{id}} መጽሐፍ በተሳካ ሁኔታ ተቀባ",
+    "RETRIEVED_BY_ISBN": "የ ISBN {{isbn}} መጽሐፍ በተሳካ ሁኔታ ተቀባ",
+    "RETRIEVED_ALL": "አጠቃላይ {{count}} መጽሐፎች በተሳካ ሁኔታ ተቀቡ",
+    "UPDATED": "የ ID {{id}} መጽሐፍ በተሳካ ሁኔታ ተሻሽሏል",
+    "DELETED": "የ ID {{id}} መጽሐፎች በተሳካ ሁኔታ ተሰርዟል",
+    "VALIDATION": {
+      "TITLE_REQUIRED": "ርእስ አስፈላጊ ነው",
+      "AUTHOR_ARRAY": "ደራሲዎቹ አይነት የሚሰጥበት ስርዓት አለበት",
+      "AUTHOR_MIN": "ቢያንስ አንድ ደራሲ መሆን አለበት",
+      "ISBN_REQUIRED": "ISBN አስፈላጊ ነው",
+      "PUBLICATIONDATE_INVALID": "የህትመት ቀን ትክክል መሆን አለበት",
+      "PUBLICATIONDATE_REQUIRED": "የህትመት ቀን አስፈላጊ ነው",
+      "PUBLISHER_REQUIRED": "አስተላላፊ አስፈላጊ ነው",
+      "GENRE_REQUIRED": "የመጽሐፍ አይነት አስፈላጊ ነው",
+      "LANGUAGE_INVALID": "ቋንቋ ከ English, Amharic, Arabic መካከል መሆን አለበት",
+      "LANGUAGE_REQUIRED": "ቋንቋ አስፈላጊ ነው"
+    }
+  },
+
+  "USER": {
+    "INVALID_OBJECT": "የተሳሳተ ተጠቃሚ ነገር",
+    "CONFLICT_EMAIL": "በ {{email}} ኢሜይል ያለው ተጠቃሚ ከዚህ በፊት አለ",
+    "NOT_FOUND_ID": "የ ID {{id}} ተጠቃሚ አልተገኘም",
+    "NOT_FOUND_EMAIL": "በ {{email}} ኢሜይል ያለው ተጠቃሚ አልተገኘም",
+    "PENDING_APPROVAL": "በ {{email}} ኢሜይል ያለው ተጠቃሚ ከአስተዳዳሪ ጋር እየተፈታ ነው",
+    "INVALID_CREDENTIALS": "የተሳሳተ መረጃ",
+    "CREATED": "አዲስ ተጠቃሚ በተሳካ ሁኔታ ተፈጥሯል",
+    "RETRIEVED_BY_ID": "የ ID {{id}} ተጠቃሚ በተሳካ ሁኔታ ተቀባ",
+    "RETRIEVED_BY_EMAIL": "በ {{email}} ኢሜይል ያለው ተጠቃሚ በተሳካ ሁኔታ ተቀባ",
+    "RETRIEVED_ALL": "አጠቃላይ {{count}} ተጠቃሚዎች በተሳካ ሁኔታ ተቀቡ",
+    "UPDATED": "የ ID {{id}} ተጠቃሚ በተሳካ ሁኔታ ተሻሽሏል",
+    "DELETED": "የ ID {{id}} ተጠቃሚ በተሳካ ሁኔታ ተሰርዟል",
+    "FORBIDDEN_ACCESS": "ክልክል ነው፣ ይህን አገልግሎት ለመጠቀም ፍቃድ የሎትም",
+    "VALIDATION": {
+      "FIRST_NAME_REQUIRED": "የመጀመሪያ ስም አስፈላጊ ነው",
+      "LAST_NAME_REQUIRED": "የአያማር ስም አስፈላጊ ነው",
+      "EMAIL_REQUIRED": "ኢሜይል አስፈላጊ ነው",
+      "EMAIL_INVALID": "ኢሜይል የተሳሳተ ነው",
+      "PASSWORD_REQUIRED": "የይለፍ ቃል አስፈላጊ ነው",
+      "PASSWORD_MIN": "የይለፍ ቃል ቢያንስ 6 ቁምፊ መሆን አለበት",
+      "ROLE_REQUIRED": "ሚና አስፈላጊ ነው",
+      "ROLE_INVALID": "ሚና መሆኑ ብቻ ወይም ላይብራሪ መሆን አለበት",
+      "LANGUAGE_REQUIRED": "ቋንቋ አስፈላጊ ነው",
+      "LANGUAGE_INVALID": "ቋንቋ ከ am, en, ar መካከል መሆን አለበት"
+    }
+  },
+  "LIBRARIAN":{
+    "LIBRARIAN_PENDING": "የመጽሐፍ ቤት ሰራተኛ በተጠባባቂ ሁኔታ ላይ ነው",
+    "LIBRARIAN_NOT_VERIFIED": "የመጽሐፍ ቤት ሰራተኛ አልተረጋገጠም"
+  },
+   "VALIDATION": {
+    "FIRST_NAME_REQUIRED": "የመጀመሪያ ስም አስፈላጊ ነው",
+    "LAST_NAME_REQUIRED": "የአያማር ስም አስፈላጊ ነው",
+    "EMAIL_INVALID": "የኢሜይል አድራሻ ልክ አይደለም",
+    "PASSWORD_MIN": "የይለፍ ቃል ቢያንስ 6 ቁምፊ መሆን አለበት",
+    "ROLE_INVALID": "ሚና መሆኑ ብቻ ወይም ላይብራሪ መሆን አለበት",
+    "LANGUAGE_INVALID": "ቋንቋ ከ am, en, ar መካከል መሆን አለበት"
+  }
+}

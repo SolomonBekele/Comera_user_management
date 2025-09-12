@@ -1,0 +1,71 @@
+{
+  "PAGE_NOT_FOUND": "الصفحة غير موجودة",
+  "INTERNAL_SERVER_ERROR": "حدث خطأ ما، يرجى المحاولة مرة أخرى لاحقًا",
+  "FORBIDDEN_ACCESS": "ممنوع، ليس لديك صلاحية للوصول إلى هذه الخدمة",
+  "UNAUTHORIZED_NO_TOKEN": "غير مصرح - لم يتم تقديم رمز",
+  "INVALID_TOKEN_OR_USER": "المستخدم غير موجود أو الرمز غير صالح",
+  
+  "BOOK": {
+    "INVALID_OBJECT": "كائن كتاب غير صالح",
+    "CONFLICT_ISBN": "الكتاب ذو رقم ISBN {{isbn}} موجود بالفعل",
+    "NOT_FOUND_ID": "الكتاب ذو المعرّف {{id}} غير موجود",
+    "NOT_FOUND_ISBN": "الكتاب ذو رقم ISBN {{isbn}} غير موجود",
+    "CREATED": "تم إنشاء الكتاب الجديد بنجاح",
+    "RETRIEVED_BY_ID": "تم جلب الكتاب بالمعرف {{id}} بنجاح",
+    "RETRIEVED_BY_ISBN": "تم جلب الكتاب برقم ISBN {{isbn}} بنجاح",
+    "RETRIEVED_ALL": "تم جلب جميع الكتب، المجموع: {{count}} كتاب",
+    "UPDATED": "تم تحديث الكتاب بالمعرف {{id}} بنجاح",
+    "DELETED": "تم حذف الكتاب بالمعرف {{id}} بنجاح",
+    "VALIDATION": {
+      "TITLE_REQUIRED": "العنوان مطلوب",
+      "AUTHOR_ARRAY": "يجب أن يكون المؤلف مصفوفة من السلاسل النصية",
+      "AUTHOR_MIN": "يجب أن يكون هناك مؤلف واحد على الأقل",
+      "ISBN_REQUIRED": "رقم ISBN مطلوب",
+      "PUBLICATIONDATE_INVALID": "يجب أن يكون تاريخ النشر تاريخًا صالحًا",
+      "PUBLICATIONDATE_REQUIRED": "تاريخ النشر مطلوب",
+      "PUBLISHER_REQUIRED": "الناشر مطلوب",
+      "GENRE_REQUIRED": "النوع مطلوب",
+      "LANGUAGE_INVALID": "يجب أن تكون اللغة English، Amharic، أو Arabic",
+      "LANGUAGE_REQUIRED": "اللغة مطلوبة"
+    }
+  },
+  "USER": {
+    "INVALID_OBJECT": "كائن مستخدم غير صالح",
+    "CONFLICT_EMAIL": "المستخدم ذو البريد الإلكتروني {{email}} موجود بالفعل",
+    "NOT_FOUND_ID": "المستخدم ذو المعرّف {{id}} غير موجود",
+    "NOT_FOUND_EMAIL": "المستخدم ذو البريد الإلكتروني {{email}} غير موجود",
+    "PENDING_APPROVAL": "المستخدم ذو البريد الإلكتروني {{email}} بانتظار موافقة المسؤول",
+    "INVALID_CREDENTIALS": "بيانات اعتماد غير صحيحة",
+    "CREATED": "تم إنشاء المستخدم الجديد بنجاح",
+    "RETRIEVED_BY_ID": "تم استرجاع المستخدم ذو المعرّف {{id}} بنجاح",
+    "RETRIEVED_BY_EMAIL": "تم استرجاع المستخدم ذو البريد الإلكتروني {{email}} بنجاح",
+    "RETRIEVED_ALL": "تم استرجاع جميع المستخدمين وعددهم {{count}} بنجاح",
+    "UPDATED": "تم تحديث المستخدم ذو المعرّف {{id}} بنجاح",
+    "DELETED": "تم حذف المستخدم ذو المعرّف {{id}} بنجاح",
+    "FORBIDDEN_ACCESS": "ممنوع، ليس لديك صلاحية للوصول إلى هذه الخدمة",
+    "VALIDATION": {
+      "FIRST_NAME_REQUIRED": "الاسم الأول مطلوب",
+      "LAST_NAME_REQUIRED": "اسم العائلة مطلوب",
+      "EMAIL_REQUIRED": "البريد الإلكتروني مطلوب",
+      "EMAIL_INVALID": "البريد الإلكتروني غير صالح",
+      "PASSWORD_REQUIRED": "كلمة المرور مطلوبة",
+      "PASSWORD_MIN": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
+      "ROLE_REQUIRED": "الدور مطلوب",
+      "ROLE_INVALID": "يجب أن يكون الدور مستخدم أو أمين مكتبة",
+      "LANGUAGE_REQUIRED": "اللغة مطلوبة",
+      "LANGUAGE_INVALID": "يجب أن تكون اللغة واحدة من am، en، ar"
+    }
+  },
+  "LIBRARIAN":{
+    "LIBRARIAN_PENDING": "أمين المكتبة في حالة انتظار",
+    "LIBRARIAN_NOT_VERIFIED": "أمين المكتبة غير مُحقق"
+  },
+  "VALIDATION": {
+    "FIRST_NAME_REQUIRED": "الاسم الأول مطلوب",
+    "LAST_NAME_REQUIRED": "اسم العائلة مطلوب",
+    "EMAIL_INVALID": "عنوان البريد الإلكتروني غير صالح",
+    "PASSWORD_MIN": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
+    "ROLE_INVALID": "يجب أن يكون الدور مستخدم أو أمين مكتبة",
+    "LANGUAGE_INVALID": "يجب أن تكون اللغة واحدة من am، en، ar"
+  }
+}

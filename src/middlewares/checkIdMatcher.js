@@ -1,9 +1,11 @@
+import i18n from "../i18n/langConfig.js";
 const checkIdMatcher = (req, res, next) => {
       try {
         if(req.user.id !== req.params.id && req.user.role !== 'admin'){
                     return res.status(400).json({
                         success:true,
-                        message:`Forbidden you are not access this service`
+                        message: i18n.__("FORBIDDEN_ACCESS")
+
                     })
                 }
         next();
