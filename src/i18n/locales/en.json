@@ -41,8 +41,17 @@
     "RETRIEVED_BY_ID": "User with ID {{id}} retrieved successfully",
     "RETRIEVED_BY_EMAIL": "User with email {{email}} retrieved successfully",
     "RETRIEVED_ALL": "Total {{count}} users retrieved successfully",
+    "RETRIEVED_NONE_": "There is no user found",
     "UPDATED": "User with ID {{id}} updated successfully",
     "DELETED": "User with ID {{id}} deleted successfully",
+    "OLD_PASSWORD_INCORRECT": "Your old password is not correct for id {{id}}",
+    "PASSWORD_CHANGED": "Password changed successfully",
+    "LOGIN_SUCCESS": "You are logged in successfully",
+    "LOGOUT_SUCCESS": "Logged out successfully",
+    "NO_TOKEN": "No token provided",
+    "INVALID_TOKEN": "Invalid token",
+
+
     "VALIDATION": {
       "FIRST_NAME_REQUIRED": "First name is required",
       "LAST_NAME_REQUIRED": "Last name is required",
