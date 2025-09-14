@@ -40,9 +40,19 @@
     "RETRIEVED_BY_ID": "تم استرجاع المستخدم ذو المعرّف {{id}} بنجاح",
     "RETRIEVED_BY_EMAIL": "تم استرجاع المستخدم ذو البريد الإلكتروني {{email}} بنجاح",
     "RETRIEVED_ALL": "تم استرجاع جميع المستخدمين وعددهم {{count}} بنجاح",
+    "RETRIEVED_NONE": "لا يوجد مستخدم تم العثور عليه",
     "UPDATED": "تم تحديث المستخدم ذو المعرّف {{id}} بنجاح",
     "DELETED": "تم حذف المستخدم ذو المعرّف {{id}} بنجاح",
     "FORBIDDEN_ACCESS": "ممنوع، ليس لديك صلاحية للوصول إلى هذه الخدمة",
+    "OLD_PASSWORD_INCORRECT": "كلمة المرور القديمة غير صحيحة للمعرّف {{id}}",
+    "PASSWORD_CHANGED": "تم تغيير كلمة المرور بنجاح",
+    "LOGIN_SUCCESS": "تم تسجيل الدخول بنجاح",
+    "LOGOUT_SUCCESS": "تم تسجيل الخروج بنجاح",
+    "NO_TOKEN": "لم يتم توفير رمز",
+    "INVALID_TOKEN": "رمز غير صالح",
+    "NO_USERS_WITH_ROLE": "لم يتم العثور على مستخدمين بالدور: ${role}",
+    "USERS_WITH_ROLE": "تم جلب المستخدمين بالدور: ${role} بنجاح",
+
     "VALIDATION": {
       "FIRST_NAME_REQUIRED": "الاسم الأول مطلوب",
       "LAST_NAME_REQUIRED": "اسم العائلة مطلوب",
@@ -58,7 +68,9 @@
   },
   "LIBRARIAN":{
     "LIBRARIAN_PENDING": "أمين المكتبة في حالة انتظار",
-    "LIBRARIAN_NOT_VERIFIED": "أمين المكتبة غير مُحقق"
+    "LIBRARIAN_NOT_VERIFIED": "أمين المكتبة غير مُحقق",
+    "STATUS_UPDATED": "تم تحديث حالة أمين المكتبة بنجاح إلى {{status}}",
+    "NOT_FOUND": "لم يتم العثور على أمين المكتبة."
   },
   "VALIDATION": {
     "FIRST_NAME_REQUIRED": "الاسم الأول مطلوب",

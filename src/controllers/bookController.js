@@ -7,13 +7,14 @@ import {
   updateBookByIdService,
   deleteBookService,
 } from "../services/bookService.js";
+import i18n from "../i18n/langConfig.js";
 
 export const createBook = async (req, res) => {
   try {
     const { title, author, isbn, publicationDate, publisher, genre, language } = req.body;
      const book = await getBookByIsbnService(isbn);
         if (book) {
-          return res.status(400).json({ error: "isbn already exists" });
+          return res.status(400).json({ error: i18n.__("BOOK.CONFLICT_ISBN",{isbn:isbn})});
         }
 
 
@@ -29,7 +30,7 @@ export const createBook = async (req, res) => {
    
     return res.status(201).json({
       status: 201,
-      message: "Book created successfully",
+      message: i18n.__("BOOK.CREATED"),
       data: newBook,
     });
   } catch (err) {
@@ -45,7 +46,7 @@ export const getAllBooks = async (req, res) => {
     const books = await getAllBooksService();
     return res.status(200).json({
       status: 200,
-      message: "Books fetched successfully",
+      message: i18n.__("BOOK.CREATED"),
       data: books,
     });
   } catch (err) {
@@ -64,13 +65,13 @@ export const getBookById = async (req, res) => {
     if (!book) {
       return res.status(404).json({
         status: 404,
-        message: "Book not found",
+        message: i18n.__("BOOK.NOT_FOUND_ID",{id:id}),
       });
     }
 
     return res.status(200).json({
       status: 200,
-      message: "Book fetched successfully",
+      message: i18n.__("BOOK.RETRIEVED_BY_ID",{id:id}),
       data: book,
     });
   } catch (err) {
@@ -89,13 +90,13 @@ export const getBookByIsbn = async (req, res) => {
     if (!book) {
       return res.status(404).json({
         status: 404,
-        message: "Book not found",
+        message: i18n.__("BOOK.NOT_FOUND_ISBN",{isbn:isbn}),
       });
     }
 
     return res.status(200).json({
       status: 200,
-      message: "Book fetched successfully",
+      message: i18n.__("BOOK.RETRIEVED_BY_ISBN",{isbn:isbn}),
       data: book,
     });
   } catch (err) {
@@ -112,9 +113,9 @@ export const updateBookById = async (req, res, next) => {
 
     const updatedBook = await updateBookByIdService(id, { title, author, isbn, publicationDate, publisher, genre, language });
 
-    if (!updatedBook) return res.status(404).json({ status: 404, message: "Book not found" });
+    if (!updatedBook) return res.status(404).json({ status: 404, message: i18n.__("BOOK.NOT_FOUND_ID",{id:id})});
 
-    res.status(200).json({ status: 200, message: "Book updated successfully", data: updatedBook });
+    res.status(200).json({ status: 200, message: i18n.__("BOOK.UPDATED"), data: updatedBook });
   } catch (err) {
     next(err);
   }
@@ -126,9 +127,9 @@ export const deleteBookById = async (req, res, next) => {
     const { id } = req.params;
     const deleted = await deleteBookService(id);
 
-    if (!deleted) return res.status(404).json({ status: 404, message: "Book not found" });
+    if (!deleted) return res.status(404).json({ status: 404, message: i18n.__("BOOK.NOT_FOUND_ID",{id:id}) });
 
-    res.status(200).json({ status: 200, message: "Book deleted successfully" });
+    res.status(200).json({ status: 200, message: i18n.__("BOOK.DELETED") });
   } catch (err) {
     next(err);
   }

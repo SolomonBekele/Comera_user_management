@@ -22,7 +22,7 @@ router.put('/:id', protectRoute, checkIdMatcher, updateUserById);
 router.delete('/:id', protectRoute, authorizeRoles('admin'), deleteUserById);
 
 // Change a user's password by ID - Only accessible by the user themselves
-router.put('/password/:id', checkIdMatcher, protectRoute, changePassword);
+router.put('/password/:id', protectRoute,checkIdMatcher, changePassword);
 
 // Change the status of a librarian (e.g., approve or suspend) - Admin only
 router.put("/librarians/:id/status", protectRoute, authorizeRoles('admin'), changeLibrarianStatus);

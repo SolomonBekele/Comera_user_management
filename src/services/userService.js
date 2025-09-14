@@ -55,7 +55,6 @@ export const deleteUserService = async (id) => {
         const usersData = await readUsersFile()
         const parsedUsers = JSON.parse(usersData)
         const fetchedIndex = parsedUsers.findIndex(user=>user.id == id)
-        console.log(fetchedIndex);
         if(fetchedIndex !== -1){
             parsedUsers.splice(fetchedIndex,1)
             const newUsers = JSON.stringify(parsedUsers, null, 2);

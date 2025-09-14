@@ -1,6 +1,6 @@
 import argon2 from "argon2";
 import { changeLibrarianStatusService, changePasswordService, deleteUserService, getAllUsersService, getUserByIdService, getUsersByRoleService, updateUserService } from "../services/userService.js";
-
+import i18n from "../i18n/langConfig.js";
 
 
 export const getAllUsers = async (req,res,next) =>{
@@ -8,13 +8,13 @@ export const getAllUsers = async (req,res,next) =>{
         const users = await getAllUsersService();
         if(!users){
             return res.status(404).json({
-                message:"user not found"
+            message:i18n.__("USER.RETRIEVED_NONE")  
             })
         }
         const usersWithoutPasswords = users.map(({ password, ...rest }) => rest);
         res.status(200).json({
             success:true,
-            message:"users fetched successfully",
+            message:i18n.__("USER.RETRIEVED_ALL",{count:usersWithoutPasswords.length}),
             data:usersWithoutPasswords
         })
     }catch(err){
@@ -32,13 +32,13 @@ export const getUserById = async (req,res,next) =>{
         if(!user){
             return res.status(404).json({
                 success:true,
-                message:`user not found with id ${id}`
+                message:i18n.__("USER.NOT_FOUND_ID",{id:id})
             })
         }
         const {password,...userWithoutPassword} = user
         res.status(200).json({
             success:true,
-            message:"user fetched successfully",
+            message:i18n.__("USER.RETRIEVED_BY_ID",{id,id}),
             data:userWithoutPassword
         })
     }catch(err){
@@ -56,13 +56,13 @@ export const getUserByToken = async (req,res,next) =>{
         if(!user){
             return res.status(404).json({
                 success:true,
-                message:`user not found with id ${id}`
+                message:i18n.__("USER.NOT_FOUND_ID",{id:id})
             })
         }
         const {password,...userWithoutPassword} = user
         res.status(200).json({
             success:true,
-            message:"user fetched successfully",
+            message:i18n.__("USER.RETRIEVED_BY_ID",{id,id}),
             data:userWithoutPassword
         })
     }catch(err){
@@ -81,13 +81,13 @@ export const updateUserById = async (req,res,next) =>{
         if(user === -1){
             return res.status(404).json({
                 success:true,
-                message:`user not found with id ${id}`
+                message:i18n.__("USER.NOT_FOUND_ID",{id:id})
             })
         }
         const {password,...userWithoutPassword} = user
         res.status(200).json({
             success:true,
-            message:"user updated successfully",
+            message:i18n.__("USER.UPDATED",{id:id}),
             data:userWithoutPassword
         })
     }catch(err){
@@ -105,12 +105,12 @@ export const deleteUserById = async (req,res,next) =>{
         if(user === -1){
             return res.status(404).json({
                 success:true,
-                message:`user not found with id ${id}`
+                message:i18n.__("USER.NOT_FOUND_ID",{id:id})
             })
         }
         res.status(200).json({
             success:true,
-            message:"user deleted successfully",
+            message:i18n.__("USER.DELETED",{id:id}),
         })
     }catch(err){
         console.log("fetch user data error occured", err);
@@ -128,21 +128,21 @@ export const changePassword = async (req,res,next) =>{
         if(!user){
             return res.status(404).json({
                 success:true,
-                message:`user not found with id ${id}`
+                message:i18n.__("USER.NOT_FOUND_ID",{id:id})
             })
         }
         const isCorrectOldPassword = await argon2.verify(user.password,oldPassword)
         if(!isCorrectOldPassword){
             return res.status(404).json({
                 success:true,
-                message:`your old message is not correct with id ${id}`
+                message:i18n.__('USER.OLD_PASSWORD_INCORRECT',{id:id})
             })
         }
         const hashedPassword = await argon2.hash(newPassword)
         const changed = await changePasswordService(id,hashedPassword);
         res.status(200).json({
             success:true,
-            message:"password changed successfully",
+            message:i18n.__('USER.PASSWORD_CHANGED')
         })
     }catch(err){
         console.log("fetch user data error occured", err);
@@ -162,11 +162,11 @@ export const changeLibrarianStatus = async (req, res) => {
 
     if (result) {
       return res.status(200).json({
-        message: `Librarian status updated successfully to "${status}".`,
+        message: i18n.__("LIBRARIAN.STATUS_UPDATED",{status:status}),
       });
     } else {
       return res.status(404).json({
-        message: "Librarian not found.",
+        message: i18n.__("LIBRARIAN.NOT_FOUND"),
       });
     }
   } catch (err) {
@@ -184,12 +184,12 @@ export const getUserByRole = async (req, res) => {
     const users = await getUsersByRoleService(role);
 
     if (users.length === 0) {
-      return res.status(404).json({ message: `No users found with role: ${role}` });
+      return res.status(404).json({ message: i18n.__("USER.NO_USERS_WITH_ROLE",{role:role}) });
     }
     const usersWithoutPasswords = users.map(({ password, ...rest }) => rest);
     return res.status(200).json({
       success:true,
-      message: `Users with role: ${role}`,
+      message: i18n.__("USER.USERS_WITH_ROLE",{role:role}),
       data: usersWithoutPasswords,
     });
   } catch (err) {

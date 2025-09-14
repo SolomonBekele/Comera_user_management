@@ -5,7 +5,8 @@
     "last_name": "Bekele.com",
     "email": "solubman28@gmail.com",
     "password": "$argon2id$v=19$m=65536,t=3,p=4$AELLscB2XVXJZiuva8MxGQ$dDnOVyv1TAPn5J/dOKYUE1diMXb7VpBtHaM6R1yPsWk",
-    "role": "admin"
+    "role": "admin",
+    "language": "am"
   },
   {
     "id": "2b1b9b8a-7ae9-4e5d-be55-ddccc1242a67",
@@ -88,15 +89,6 @@
     "role": "user"
   },
   {
-    "id": "d0c58b61-f962-457d-a6f5-131bf75c8c15",
-    "first_name": "lelisas",
-    "last_name": "guluma",
-    "email": "lelisa@gmail.com",
-    "password": "$argon2id$v=19$m=65536,t=3,p=4$INvDCfxPIc8Lt/LmJHG+Dg$HsaVb5SiG0gWhRMjE67lsAWe/+0UfII2jP8lsZbiBFA",
-    "role": "user",
-    "created_at": "2025-09-09T07:23:38.531Z"
-  },
-  {
     "id": "55e496b3-076c-4f1e-9e49-5b6cee846924",
     "first_name": "bilal",
     "last_name": "benti",
@@ -118,13 +110,24 @@
   },
   {
     "id": "fa106823-d40d-41c7-8b4f-995a20f720e0",
-    "first_name": "sintaye",
-    "last_name": "Terefa",
+    "first_name": "sintee",
+    "last_name": "guluma",
     "email": "sinte@gmail.com",
     "password": "$argon2id$v=19$m=65536,t=3,p=4$ahUimaGA7tGENvqln5QqIw$R+F3P2NFLAO7V+/wq/FcCFzvPHlUlj0VZU7jsFa8IHM",
     "role": "LIBRARIAN",
-    "language": "en",
+    "language": "am",
     "status": "PENDING",
     "created_at": "2025-09-12T08:13:00.029Z"
+  },
+  {
+    "id": "68d0203d-f15c-42e4-95da-0d476cd4d365",
+    "first_name": "sintaye",
+    "last_name": "Terefa",
+    "email": "sinte1@gmail.com",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$xCp92+7xN6eOFVWhTD6j/g$U9chZAq1kHqTERrMQltPfX0ou+BuBcio7osAivL+NH8",
+    "role": "LIBRARIAN",
+    "language": "am",
+    "status": "PENDING",
+    "created_at": "2025-09-12T13:20:33.965Z"
   }
 ]

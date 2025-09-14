@@ -2,6 +2,8 @@ import { getUserByEmailService } from "../services/userService.js";
 import argon2 from "argon2"
 import {generateAccessToken,generateRefreshToken,verifyToken} from "../utils/generateToken.js";
 import { signUpService } from "../services/authService.js";
+import i18n from "../i18n/langConfig.js";
+import { I18n } from "i18n";
 
 
 export const signUp = async (req, res, next) => {
@@ -15,8 +17,10 @@ export const signUp = async (req, res, next) => {
     } = req.body;
     const hashedPassword = await argon2.hash(password);
     const user = await getUserByEmailService(email);
+    i18n.setLocale(language)
+  
     if (user) {
-      return res.status(400).json({ error: "email already exists" });
+      return res.status(400).json({ error: i18n.__("USER.CONFLICT_EMAIL",{email:email}) });
     }
   try {
     let role1 = role.toUpperCase()
@@ -30,7 +34,7 @@ export const signUp = async (req, res, next) => {
 
     res.status(200).json({
         success:true,
-        message:"user registered successfully",
+        message:i18n.__('USER.CREATED'),
         data:userWithoutPassword
     })
 
@@ -51,13 +55,13 @@ export const login = async (req, res) => {
         if (!user) {
           return res
             .status(400)
-            .json({ error: "email or password not correct" });
+            .json({ error: i18n.__("USER.INVALID_CREDENTIALS") });
         }
-
+        i18n.setLocale(user?.language)
         const isPasswordCorrect = await argon2.verify(user?.password,req.body.password)
 
         if (!user || !isPasswordCorrect  ) {
-            return res.status(400).json({ error: "email or password not correct" });
+            return res.status(400).json({ error: i18n.__("USER.INVALID_CREDENTIALS")  });
         }
 
         const { password, ...userWithoutPassword } = user;
@@ -66,7 +70,7 @@ export const login = async (req, res) => {
         const refreshToken = generateRefreshToken(user.id,user.languagex);
         res.status(200).json({
             success: true,
-            message: "you are Logged successfully",
+            message: i18n.__("USER.LOGIN_SUCCESS"),
             id:user.id,
             token,
             refreshToken,
@@ -79,15 +83,15 @@ export const login = async (req, res) => {
 };
 export const logout = (req, res) => {
 
-  res.json({ message: "Logged out successfully." });
+  res.json({ message: i18n.__("USER.LOGOUT_SUCCESS") });
 };
 
 export const refreshToken =  (req, res) => {
   const token = req.body.refreshToken;
-  if (!token) return res.status(401).json({ message: "No token provided" });
+  if (!token) return res.status(401).json({ message: i18n.__("USER.NO_TOKEN") });
 
   const payload = verifyToken(token, process.env.REFRESH_SECRET);
-  if (!payload) return res.status(403).json({ message: "Invalid token" });
+  if (!payload) return res.status(403).json({ message: i18n.__("USER.INVALID_TOKEN") });
 
   const newAccessToken = generateAccessToken(payload.userId);
   res.json({ token: newAccessToken });

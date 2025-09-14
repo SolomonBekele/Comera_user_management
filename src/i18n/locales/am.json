@@ -41,9 +41,19 @@
     "RETRIEVED_BY_ID": "የ ID {{id}} ተጠቃሚ በተሳካ ሁኔታ ተቀባ",
     "RETRIEVED_BY_EMAIL": "በ {{email}} ኢሜይል ያለው ተጠቃሚ በተሳካ ሁኔታ ተቀባ",
     "RETRIEVED_ALL": "አጠቃላይ {{count}} ተጠቃሚዎች በተሳካ ሁኔታ ተቀቡ",
+    "RETRIEVED_NONE": "ምንም ተጠቃሚ አልተገኘም",
     "UPDATED": "የ ID {{id}} ተጠቃሚ በተሳካ ሁኔታ ተሻሽሏል",
     "DELETED": "የ ID {{id}} ተጠቃሚ በተሳካ ሁኔታ ተሰርዟል",
     "FORBIDDEN_ACCESS": "ክልክል ነው፣ ይህን አገልግሎት ለመጠቀም ፍቃድ የሎትም",
+    "OLD_PASSWORD_INCORRECT": "የድሮ የይለፍ ቃልዎ ስህተት ነው ለመለያ {{id}}",
+    "PASSWORD_CHANGED": "የይለፍ ቃል በተሳካ ሁኔታ ተለዋዋጭ ሆነ",
+    "LOGIN_SUCCESS": "በተሳካ ሁኔታ ገብተዋል",
+    "LOGOUT_SUCCESS": "በተሳካ ሁኔታ ወጥተዋል",
+    "NO_TOKEN": "ቶከን አልተሰጠም",
+    "INVALID_TOKEN": "ትክክለኛ ቶከን አይደለም",
+    "NO_USERS_WITH_ROLE": "ተጠቃሚዎች  {{role}} role አልተገኙም፡",
+    "USERS_WITH_ROLE": "በዚህ  {{role}} role ያሉ ተጠቃሚዎች በተሳካ ሁኔታ ተመልሰዋል",
+
     "VALIDATION": {
       "FIRST_NAME_REQUIRED": "የመጀመሪያ ስም አስፈላጊ ነው",
       "LAST_NAME_REQUIRED": "የአያማር ስም አስፈላጊ ነው",
@@ -59,7 +69,9 @@
   },
   "LIBRARIAN":{
     "LIBRARIAN_PENDING": "የመጽሐፍ ቤት ሰራተኛ በተጠባባቂ ሁኔታ ላይ ነው",
-    "LIBRARIAN_NOT_VERIFIED": "የመጽሐፍ ቤት ሰራተኛ አልተረጋገጠም"
+    "LIBRARIAN_NOT_VERIFIED": "የመጽሐፍ ቤት ሰራተኛ አልተረጋገጠም",
+    "STATUS_UPDATED": "ቤተ-መጽሐፍት አስተዳዳሪው ሁኔታ በተሳካ ሁኔታ ወደ {{status}} ተቀይሯል",
+    "NOT_FOUND": "ቤተ-መጽሐፍት አስተዳዳሪ አልተገኘም።"
   },
    "VALIDATION": {
     "FIRST_NAME_REQUIRED": "የመጀመሪያ ስም አስፈላጊ ነው",
