@@ -50,6 +50,8 @@
     "LOGOUT_SUCCESS": "تم تسجيل الخروج بنجاح",
     "NO_TOKEN": "لم يتم توفير رمز",
     "INVALID_TOKEN": "رمز غير صالح",
+    "NO_USERS_WITH_ROLE": "لم يتم العثور على مستخدمين بالدور: ${role}",
+    "USERS_WITH_ROLE": "تم جلب المستخدمين بالدور: ${role} بنجاح",
 
     "VALIDATION": {
       "FIRST_NAME_REQUIRED": "الاسم الأول مطلوب",
@@ -66,7 +68,9 @@
   },
   "LIBRARIAN":{
     "LIBRARIAN_PENDING": "أمين المكتبة في حالة انتظار",
-    "LIBRARIAN_NOT_VERIFIED": "أمين المكتبة غير مُحقق"
+    "LIBRARIAN_NOT_VERIFIED": "أمين المكتبة غير مُحقق",
+    "STATUS_UPDATED": "تم تحديث حالة أمين المكتبة بنجاح إلى {{status}}",
+    "NOT_FOUND": "لم يتم العثور على أمين المكتبة."
   },
   "VALIDATION": {
     "FIRST_NAME_REQUIRED": "الاسم الأول مطلوب",

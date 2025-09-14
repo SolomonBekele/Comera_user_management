@@ -17,8 +17,10 @@ export const signUp = async (req, res, next) => {
     } = req.body;
     const hashedPassword = await argon2.hash(password);
     const user = await getUserByEmailService(email);
+    i18n.setLocale(language)
+  
     if (user) {
-      return res.status(400).json({ error: i18n.__("USER.CONFLICT_EMAIL") });
+      return res.status(400).json({ error: i18n.__("USER.CONFLICT_EMAIL",{email:email}) });
     }
   try {
     let role1 = role.toUpperCase()
@@ -55,7 +57,7 @@ export const login = async (req, res) => {
             .status(400)
             .json({ error: i18n.__("USER.INVALID_CREDENTIALS") });
         }
-
+        i18n.setLocale(user?.language)
         const isPasswordCorrect = await argon2.verify(user?.password,req.body.password)
 
         if (!user || !isPasswordCorrect  ) {

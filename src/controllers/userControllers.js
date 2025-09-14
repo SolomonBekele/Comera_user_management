@@ -162,11 +162,11 @@ export const changeLibrarianStatus = async (req, res) => {
 
     if (result) {
       return res.status(200).json({
-        message: `Librarian status updated successfully to "${status}".`,
+        message: i18n.__("LIBRARIAN.STATUS_UPDATED",{status:status}),
       });
     } else {
       return res.status(404).json({
-        message: "Librarian not found.",
+        message: i18n.__("LIBRARIAN.NOT_FOUND"),
       });
     }
   } catch (err) {
@@ -184,12 +184,12 @@ export const getUserByRole = async (req, res) => {
     const users = await getUsersByRoleService(role);
 
     if (users.length === 0) {
-      return res.status(404).json({ message: `No users found with role: ${role}` });
+      return res.status(404).json({ message: i18n.__("USER.NO_USERS_WITH_ROLE",{role:role}) });
     }
     const usersWithoutPasswords = users.map(({ password, ...rest }) => rest);
     return res.status(200).json({
       success:true,
-      message: `Users with role: ${role}`,
+      message: i18n.__("USER.USERS_WITH_ROLE",{role:role}),
       data: usersWithoutPasswords,
     });
   } catch (err) {

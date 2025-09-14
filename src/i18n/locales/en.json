@@ -50,6 +50,8 @@
     "LOGOUT_SUCCESS": "Logged out successfully",
     "NO_TOKEN": "No token provided",
     "INVALID_TOKEN": "Invalid token",
+    "NO_USERS_WITH_ROLE": "No users found with role {{role}}",
+    "USERS_WITH_ROLE": "Users with role {{role}} fetched successfully",
 
 
     "VALIDATION": {
@@ -67,7 +69,9 @@
   },
   "LIBRARIAN":{
     "LIBRARIAN_PENDING": "Librarian is in pending state",
-    "LIBRARIAN_NOT_VERIFIED": "Librarian is not verified"
+    "LIBRARIAN_NOT_VERIFIED": "Librarian is not verified",
+    "STATUS_UPDATED": "Librarian status updated successfully to {{status}}",
+    "NOT_FOUND": "Librarian not found."
   },
   "VALIDATION": {
     "FIRST_NAME_REQUIRED": "First name is required",
