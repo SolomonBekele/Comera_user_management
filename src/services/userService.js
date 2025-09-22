@@ -19,7 +19,8 @@ export const getUserByIdService = async (id) => {
 };
 export const getUserByEmailService = async (email) => {
   try {
-        return await getUserByEmailRepo(email);
+        const user = await getUserByEmailRepo(email);
+        return user;
       } catch (err) {
           throw new Error("error on getUserByEmailService " + err.message)
       }
