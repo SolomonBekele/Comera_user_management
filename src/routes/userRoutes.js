@@ -7,7 +7,7 @@ import checkIdMatcher from "../middlewares/checkIdMatcher.js";
 const router = express.Router()
 
 // Get all users - Admin only
-router.get('/', protectRoute, authorizeRoles('admin'), getAllUsers);
+router.get('/', protectRoute, authorizeRoles('ADMIN'), getAllUsers);
 
 // Get a single user by ID - Only accessible by user themselves or admin
 router.get('/:id', protectRoute, checkIdMatcher, getUserById);
@@ -19,15 +19,15 @@ router.get('/self/token', protectRoute, getUserByToken);
 router.put('/:id', protectRoute, checkIdMatcher, updateUserById);
 
 // Delete a user by ID - Admin only
-router.delete('/:id', protectRoute, authorizeRoles('admin'), deleteUserById);
+router.delete('/:id', protectRoute, authorizeRoles('ADMIN'), deleteUserById);
 
 // Change a user's password by ID - Only accessible by the user themselves
 router.put('/password/:id', protectRoute,checkIdMatcher, changePassword);
 
 // Change the status of a librarian (e.g., approve or suspend) - Admin only
-router.put("/librarians/:id/status", protectRoute, authorizeRoles('admin'), changeLibrarianStatus);
+router.put("/librarians/:id/status", protectRoute, authorizeRoles('ADMIN'), changeLibrarianStatus);
 
 // Get all users by role (e.g., 'user' or 'librarian') - Admin only
-router.get("/role/:role", protectRoute, authorizeRoles('admin'), getUserByRole);
+router.get("/role/:role", protectRoute, authorizeRoles('ADMIN'), getUserByRole);
 
 export default router;

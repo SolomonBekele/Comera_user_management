@@ -9,7 +9,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "migrate": "docker compose run --rm flyway",
+    "info": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root info",
+    "clean": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root clean"
   },
   "dependencies": {
     "argon2": "^0.44.0",
@@ -18,7 +21,9 @@
     "i18n": "^0.15.1",
     "joi": "^18.0.1",
     "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.15.0",
     "nodemon": "^3.1.10",
+    "sequelize": "^6.37.7",
     "uuid": "^11.1.0"
   }
 }

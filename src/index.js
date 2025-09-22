@@ -4,7 +4,9 @@ import userRoute from "./routes/userRoutes.js";
 import authRoute from "./routes/authRoutes.js";
 import bookRoute from "./routes/bookRoutes.js"
 import i18n from './i18n/langConfig.js';
+import argon2 from 'argon2'
 
+// console.log( argon2.hash("password123").then((data)=>console.log(data)));
 
 dotenv.config();
 
