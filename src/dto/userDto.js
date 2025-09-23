@@ -42,3 +42,30 @@ export const loginUserDTO = Joi.object({
     "string.min": i18n.__("USER.VALIDATION.PASSWORD_MIN"),
   }),
 });
+export const userUpdateDto   = Joi.object({
+  first_name: Joi.string().required().messages({
+    "string.empty": i18n.__("USER.VALIDATION.FIRST_NAME_REQUIRED"),
+  }),
+  last_name: Joi.string().required().messages({
+    "string.empty": i18n.__("USER.VALIDATION.LAST_NAME_REQUIRED"),
+  })
+})
+export const changePasswordDto = Joi.object({
+  oldPassword: Joi.string().required().messages({
+    "string.empty": i18n.__("USER.VALIDATION.OLD_PASSWORD_REQUIRED"),
+  }),
+  newPassword: Joi.string()
+    .required()
+    .invalid(Joi.ref("oldPassword")) 
+    .messages({
+      "string.empty": i18n.__("USER.VALIDATION.NEW_PASSWORD_REQUIRED"),
+      "any.invalid": i18n.__("USER.VALIDATION.NEW_PASSWORD_NOT_SAME"), // add this to your i18n
+    }),
+});
+export const changeLibrarianStatusDto = Joi.object({
+  status: Joi.string().required().messages({
+    "string.empty": i18n.__("USER.VALIDATION.LIBRARIAN_STATUS_REQUIRED"),
+  }),
+});
+
+

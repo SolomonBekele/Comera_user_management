@@ -64,7 +64,13 @@
       "ROLE_REQUIRED": "ሚና አስፈላጊ ነው",
       "ROLE_INVALID": "ሚና መሆኑ ብቻ ወይም ላይብራሪ መሆን አለበት",
       "LANGUAGE_REQUIRED": "ቋንቋ አስፈላጊ ነው",
-      "LANGUAGE_INVALID": "ቋንቋ ከ am, en, ar መካከል መሆን አለበት"
+      "LANGUAGE_INVALID": "ቋንቋ ከ am, en, ar መካከል መሆን አለበት",
+      "OLD_PASSWORD_REQUIRED": "የቀድሞ የይለፍ ቃል አስፈላጊ ነው",
+      "NEW_PASSWORD_REQUIRED": "አዲስ የይለፍ ቃል አስፈላጊ ነው",
+      "NEW_PASSWORD_NOT_SAME": "አዲሱ የይለፍ ቃል ከድሮው የይለፍ ቃል የተለየ መሆን አለበት",
+      "LIBRARIAN_STATUS_REQUIRED": "የቤተ-መፅሀፍት ባለሞያ ሁኔታ አስፈላጊ ነው"
+
+
     }
   },
   "LIBRARIAN":{

@@ -48,7 +48,8 @@ export const createUser = async (user) => {
 // ---- GET ALL USERS ----
 export const getAllUsersRepo = async () => {
   if (STORAGE_TYPE === "sequelize") {
-    return await UserModel.findAll();
+    const users = await UserModel.findAll();
+    return users.map(user => user.dataValues)
   } else if (STORAGE_TYPE === "mysql") {
     const [rows] = await pool.query("SELECT * FROM users");
     return rows;
@@ -61,7 +62,11 @@ export const getAllUsersRepo = async () => {
 // ---- GET USER BY ID ----
 export const getUserByIdRepo = async (id) => {
   if (STORAGE_TYPE === "sequelize") {
-    return await UserModel.findByPk(id);
+    const user =await UserModel.findByPk(id);
+    if(user){
+      return user.dataValues;
+    }
+    return null
   } else if (STORAGE_TYPE === "mysql") {
     const [rows] = await pool.query("SELECT * FROM users WHERE id = ?", [id]);
     return rows.length ? rows[0] : null;
@@ -75,7 +80,11 @@ export const getUserByIdRepo = async (id) => {
 // ---- GET USER BY EMAIL ----
 export const getUserByEmailRepo = async (email) => {
   if (STORAGE_TYPE === "sequelize") {
-    return await UserModel.findOne({ where: { email } });
+    const user = await UserModel.findOne({ where: { email } });
+    if(user){
+      return user.dataValues;
+    }
+    return null
   } else if (STORAGE_TYPE === "mysql") {
     const [rows] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
     return rows.length ? rows[0] : null;
@@ -94,7 +103,7 @@ export const updateUserRepo = async (id, first_name, last_name) => {
     user.first_name = first_name;
     user.last_name = last_name;
     await user.save();
-    return user;
+    return user.dataValues;
   } else if (STORAGE_TYPE === "mysql") {
     const sql = `UPDATE users SET first_name = ?, last_name = ? WHERE id = ?`;
     const [result] = await pool.query(sql, [first_name, last_name, id]);
@@ -139,7 +148,8 @@ export const deleteUserRepo = async (id) => {
 };
 export const getUsersByRoleRepo = async (role) => {
   if (STORAGE_TYPE === "sequelize") {
-    return await UserModel.findAll({ where: { role } });
+    const users = await UserModel.findAll({ where: { role } });
+    return users.map(user => user.dataValues)
   } else if (STORAGE_TYPE === "mysql") {
     const sql = `SELECT * FROM users WHERE role = ?`;
     const [rows] = await pool.query(sql, [role]);

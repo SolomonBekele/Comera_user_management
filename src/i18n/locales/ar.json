@@ -63,7 +63,12 @@
       "ROLE_REQUIRED": "الدور مطلوب",
       "ROLE_INVALID": "يجب أن يكون الدور مستخدم أو أمين مكتبة",
       "LANGUAGE_REQUIRED": "اللغة مطلوبة",
-      "LANGUAGE_INVALID": "يجب أن تكون اللغة واحدة من am، en، ar"
+      "LANGUAGE_INVALID": "يجب أن تكون اللغة واحدة من am، en، ar",
+      "OLD_PASSWORD_REQUIRED": "كلمة المرور القديمة مطلوبة",
+      "NEW_PASSWORD_REQUIRED": "كلمة المرور الجديدة مطلوبة",
+      "NEW_PASSWORD_NOT_SAME": "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور القديمة",
+      "LIBRARIAN_STATUS_REQUIRED": "حالة أمين المكتبة مطلوبة"
+
     }
   },
   "LIBRARIAN":{

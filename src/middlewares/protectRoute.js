@@ -20,7 +20,6 @@ const protectRoute = async (req, res, next) => {
       return res.status(401).json({ error: i18n.__("UNAUTHORIZED_NO_TOKEN") });
     }
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
     const user = await getUserByIdService(decoded.userId);
     
     if (!user) {
