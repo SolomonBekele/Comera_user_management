@@ -50,8 +50,8 @@ export const signUp = async (req, res, next) => {
 export const login = async (req, res) => {
     try {
         const  {email} = req.body;
-
         const user = await getUserByEmailService(email);
+        console.log(user);
         if (!user) {
           return res
             .status(400)
@@ -59,12 +59,13 @@ export const login = async (req, res) => {
         }
         i18n.setLocale(user?.language)
         const isPasswordCorrect = await argon2.verify(user?.password,req.body.password)
-
+        
         if (!user || !isPasswordCorrect  ) {
             return res.status(400).json({ error: i18n.__("USER.INVALID_CREDENTIALS")  });
         }
 
         const { password, ...userWithoutPassword } = user;
+
         const token = generateAccessToken(user.id,user.language)
       
         const refreshToken = generateRefreshToken(user.id,user.languagex);
