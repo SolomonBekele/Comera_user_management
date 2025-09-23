@@ -1,13 +1,16 @@
-import  pool  from "../config/db/mysqlConfig.js";
+import pool from "../config/db/mysqlConfig.js";
 import { readBooksFile, writeBooksFile } from "../config/bookConfig/bookFileHandler.js";
-import { Book } from "../model/bookModel.js";
+import{ Book as BookModel} from "../model/sequelize/bookModelSequelize.js"; // Sequelize Book model
 
 const STORAGE_TYPE = process.env.STORAGE_TYPE || "file";
 
 // ---- CREATE BOOK ----
 export const createBookRepo = async (bookData) => {
   const id = bookData.id;
-  if (STORAGE_TYPE === "mysql") {
+  if (STORAGE_TYPE === "sequelize") {
+    const book = await BookModel.create(bookData);
+    return book.dataValues;
+  } else if (STORAGE_TYPE === "mysql") {
     const sql = `INSERT INTO books (id, title, author, isbn, publication_date, publisher, genre, language)
                  VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
     await pool.query(sql, [
@@ -32,7 +35,10 @@ export const createBookRepo = async (bookData) => {
 
 // ---- GET ALL BOOKS ----
 export const getAllBooksRepo = async () => {
-  if (STORAGE_TYPE === "mysql") {
+  if (STORAGE_TYPE === "sequelize") {
+    const books = await BookModel.findAll();
+    return books.map((book) => book.dataValues);
+  } else if (STORAGE_TYPE === "mysql") {
     const [rows] = await pool.query("SELECT * FROM books");
     return rows;
   } else {
@@ -43,7 +49,10 @@ export const getAllBooksRepo = async () => {
 
 // ---- GET BOOK BY ID ----
 export const getBookByIdRepo = async (id) => {
-  if (STORAGE_TYPE === "mysql") {
+  if (STORAGE_TYPE === "sequelize") {
+    const book = await BookModel.findByPk(id);
+    return book ? book.dataValues : null;
+  } else if (STORAGE_TYPE === "mysql") {
     const [rows] = await pool.query("SELECT * FROM books WHERE id = ?", [id]);
     return rows.length ? rows[0] : null;
   } else {
@@ -55,7 +64,12 @@ export const getBookByIdRepo = async (id) => {
 
 // ---- GET BOOK BY TITLE ----
 export const getBookByTitleRepo = async (title) => {
-  if (STORAGE_TYPE === "mysql") {
+  if (STORAGE_TYPE === "sequelize") {
+    const book = await BookModel.findOne({
+      where: { title: title },
+    });
+    return book ? book.dataValues : null;
+  } else if (STORAGE_TYPE === "mysql") {
     const [rows] = await pool.query("SELECT * FROM books WHERE LOWER(title) = ?", [title.toLowerCase()]);
     return rows.length ? rows[0] : null;
   } else {
@@ -67,7 +81,12 @@ export const getBookByTitleRepo = async (title) => {
 
 // ---- GET BOOK BY ISBN ----
 export const getBookByIsbnRepo = async (isbn) => {
-  if (STORAGE_TYPE === "mysql") {
+  if (STORAGE_TYPE === "sequelize") {
+    const book = await BookModel.findOne({
+      where: { isbn: isbn },
+    });
+    return book ? book.dataValues : null;
+  } else if (STORAGE_TYPE === "mysql") {
     const [rows] = await pool.query("SELECT * FROM books WHERE isbn = ?", [isbn]);
     return rows.length ? rows[0] : null;
   } else {
@@ -79,7 +98,12 @@ export const getBookByIsbnRepo = async (isbn) => {
 
 // ---- UPDATE BOOK BY ID ----
 export const updateBookByIdRepo = async (id, bookData) => {
-  if (STORAGE_TYPE === "mysql") {
+  if (STORAGE_TYPE === "sequelize") {
+    const [updated] = await BookModel.update(bookData, { where: { id } });
+    if (updated === 0) return null;
+    const book = await BookModel.findByPk(id);
+    return book ? book.dataValues : null;
+  } else if (STORAGE_TYPE === "mysql") {
     const sql = `
       UPDATE books
       SET title = ?, author = ?, isbn = ?, publication_date = ?, publisher = ?, genre = ?, language = ?
@@ -109,14 +133,16 @@ export const updateBookByIdRepo = async (id, bookData) => {
       await writeBooksFile(JSON.stringify(parsedBooks, null, 2));
       return parsedBooks[index];
     }
-
     return null;
   }
 };
 
 // ---- DELETE BOOK ----
 export const deleteBookRepo = async (id) => {
-  if (STORAGE_TYPE === "mysql") {
+  if (STORAGE_TYPE === "sequelize") {
+    const deleted = await BookModel.destroy({ where: { id } });
+    return deleted > 0;
+  } else if (STORAGE_TYPE === "mysql") {
     const [result] = await pool.query("DELETE FROM books WHERE id = ?", [id]);
     return result.affectedRows > 0;
   } else {
