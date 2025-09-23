@@ -4,7 +4,7 @@ export class Book {
     this.title = title;
     this.author = author;
     this.isbn = isbn;
-    this.publicationDate = publicationDate;
+    this.publication_date = publicationDate;
     this.publisher = publisher;
     this.genre = genre;
     this.language = language;

@@ -46,7 +46,7 @@ export const getAllBooks = async (req, res) => {
     const books = await getAllBooksService();
     return res.status(200).json({
       status: 200,
-      message: i18n.__("BOOK.CREATED"),
+      message: i18n.__("BOOK.RETRIEVED_ALL",{count:books.length}),
       data: books,
     });
   } catch (err) {

@@ -20,7 +20,7 @@ export const Book = sequelize.define("Book",{
       unique: true,
       allowNull: false,
     },
-    publicationDate: {
+    publication_date: {
       type: DataTypes.DATE,
       allowNull: false,
     },
