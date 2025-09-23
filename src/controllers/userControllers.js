@@ -78,7 +78,7 @@ export const updateUserById = async (req,res,next) =>{
         const id = req.params.id;
         const {first_name,last_name} = req.body;
         const user = await updateUserService(id,first_name,last_name);
-        if(user === -1){
+        if(!user){
             return res.status(404).json({
                 success:true,
                 message:i18n.__("USER.NOT_FOUND_ID",{id:id})
@@ -102,7 +102,7 @@ export const deleteUserById = async (req,res,next) =>{
     try{
         const id = req.params.id;
         const user = await deleteUserService(id);
-        if(user === -1){
+        if(!user){
             return res.status(404).json({
                 success:true,
                 message:i18n.__("USER.NOT_FOUND_ID",{id:id})

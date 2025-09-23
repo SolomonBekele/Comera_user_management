@@ -64,7 +64,11 @@
       "ROLE_REQUIRED": "Role is required",
       "ROLE_INVALID": "Role must be user or librarian",
       "LANGUAGE_REQUIRED": "Language is required",
-      "LANGUAGE_INVALID": "Language must be am, en, or ar"
+      "LANGUAGE_INVALID": "Language must be am, en, or ar",
+      "OLD_PASSWORD_REQUIRED":"Old password is required",
+      "NEW_PASSWORD_REQUIRED":"NEW password is required",
+      "NEW_PASSWORD_NOT_SAME": "New password must be different from the old password",
+      "LIBRARIAN_STATUS_REQUIRED": "Librarian status is required"
     }
   },
   "LIBRARIAN":{
