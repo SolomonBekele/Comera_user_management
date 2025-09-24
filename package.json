@@ -12,7 +12,7 @@
     "dev": "nodemon src/index.js",
     "migrate": "docker compose run --rm flyway",
     "info": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root info",
-    "clean": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root clean",
+    "clean": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root  -cleanDisabled=false clean",
     "repair": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root repair"
   },
   "dependencies": {
@@ -26,5 +26,8 @@
     "nodemon": "^3.1.10",
     "sequelize": "^6.37.7",
     "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.3"
   }
 }
