@@ -1,7 +1,7 @@
 import { readUsersFile, writeUsersFile } from "../config/userConfig/userFileHanler.js";
 import User from "../model/usersModel.js";
 import { v4 as uuidv4 } from 'uuid';
-import { createUser } from "../Repositories/userRepository.js";
+import userRepo from "../repositories/users/userRepo.js";
 
 const STORAGE_TYPE = process.env.STORAGE_TYPE || "file"; // "file" or "mysql"
 
@@ -12,8 +12,8 @@ export const signUpService = async ( first_name,last_name, email, password,role,
         
         const created_at = new Date()
         const newUser = new User(id, first_name, last_name,email, password, role,language,status,created_at);
-        
-        return await createUser(newUser);
+        const registeredUser = await userRepo.createUser(newUser);
+        return registeredUser.dataValues;
     }
     catch(err){
         throw new Error("error on createUserService " + err)

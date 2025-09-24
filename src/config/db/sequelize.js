@@ -4,8 +4,7 @@ const STORAGE_TYPE = process.env.STORAGE_TYPE || "file";
 
 let sequelize = null;
 
-if (STORAGE_TYPE === "sequelize") {
-  sequelize = new Sequelize(
+sequelize = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER,
     process.env.DB_PASSWORD,
@@ -15,6 +14,6 @@ if (STORAGE_TYPE === "sequelize") {
       logging: false,
     }
   );
-}
+
 
 export default sequelize;

@@ -12,7 +12,8 @@
     "dev": "nodemon src/index.js",
     "migrate": "docker compose run --rm flyway",
     "info": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root info",
-    "clean": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root clean"
+    "clean": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root clean",
+    "repair": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root repair"
   },
   "dependencies": {
     "argon2": "^0.44.0",

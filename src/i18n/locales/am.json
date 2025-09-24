@@ -18,6 +18,7 @@
     "DELETED": "የ ID {{id}} መጽሐፎች በተሳካ ሁኔታ ተሰርዟል",
     "VALIDATION": {
       "TITLE_REQUIRED": "ርእስ አስፈላጊ ነው",
+      "AUTHOR_REQUIRED": "ደራሲ አስፈላጊ ነው",
       "AUTHOR_ARRAY": "ደራሲዎቹ አይነት የሚሰጥበት ስርዓት አለበት",
       "AUTHOR_MIN": "ቢያንስ አንድ ደራሲ መሆን አለበት",
       "ISBN_REQUIRED": "ISBN አስፈላጊ ነው",
