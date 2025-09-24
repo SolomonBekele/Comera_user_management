@@ -10,10 +10,19 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "migrate": "docker compose run --rm flyway",
-    "info": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root info",
-    "clean": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root  -cleanDisabled=false clean",
-    "repair": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root repair"
+
+    "migrate:init": "npx sequelize-cli init",
+    "migration:generate": "npx sequelize-cli migration:generate --name",
+    "migrate": "npx sequelize-cli db:migrate",
+    "migrate:undo": "npx sequelize-cli db:migrate:undo",
+    "migrate:undo:all": "npx sequelize-cli db:migrate:undo:all",
+    "seed": "npx sequelize-cli db:seed:all",
+    "seed:undo": "npx sequelize-cli db:seed:undo:all",
+
+    "fly-migrate": "docker compose run --rm flyway",
+    "fly-info": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root info",
+    "fly-clean": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root  -cleanDisabled=false clean",
+    "fly-repair": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root repair"
   },
   "dependencies": {
     "argon2": "^0.44.0",

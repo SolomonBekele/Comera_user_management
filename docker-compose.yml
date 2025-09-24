@@ -24,7 +24,7 @@ services:
         condition: service_healthy
     command: -url=jdbc:mysql://db:3306/user_db -user=root -password=root migrate
     volumes:
-      - ./migrations:/flyway/sql
+      - ./fly-migrations:/flyway/sql
 
 volumes:
   mysqldata:
