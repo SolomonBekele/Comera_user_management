@@ -18,6 +18,7 @@
     "DELETED": "Books with ID {{id}} deleted successfully",
     "VALIDATION": {
       "TITLE_REQUIRED": "Title is required",
+      "AUTHOR_REQUIRED": "Author is required",
       "AUTHOR_ARRAY": "Author must be an array of strings",
       "AUTHOR_MIN": "At least one author is required",
       "ISBN_REQUIRED": "ISBN is required",

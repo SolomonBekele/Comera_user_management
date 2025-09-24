@@ -5,10 +5,13 @@ export const createBookDTO = Joi.object({
   title: Joi.string().required().messages({
     "string.empty": i18n.__("BOOK.VALIDATION.TITLE_REQUIRED"),
   }),
-  author: Joi.array().items(Joi.string()).min(1).required().messages({
-    "array.base": i18n.__("BOOK.VALIDATION.AUTHOR_ARRAY"),
-    "array.min": i18n.__("BOOK.VALIDATION.AUTHOR_MIN"),
+  author: Joi.string().required().messages({
+    "string.empty": i18n.__("BOOK.VALIDATION.TITLE_REQUIRED"),
   }),
+  // author: Joi.array().items(Joi.string()).min(1).required().messages({
+  //   "array.base": i18n.__("BOOK.VALIDATION.AUTHOR_ARRAY"),
+  //   "array.min": i18n.__("BOOK.VALIDATION.AUTHOR_MIN"),
+  // }),
   isbn: Joi.string().required().messages({
     "string.empty": i18n.__("BOOK.VALIDATION.ISBN_REQUIRED"),
   }),

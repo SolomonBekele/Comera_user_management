@@ -26,7 +26,7 @@ export const signUp = async (req, res, next) => {
     let role1 = role.toUpperCase()
     let status = ""
     if(role1 === "LIBRARIAN") status = "PENDING"
-    else status = "APPROVED"
+    else status = "VERIFIED"
 
     const createdUser = await signUpService(first_name,last_name,email,hashedPassword,role1,language,status);
     
@@ -51,7 +51,6 @@ export const login = async (req, res) => {
     try {
         const  {email} = req.body;
         const user = await getUserByEmailService(email);
-        console.log(user);
         if (!user) {
           return res
             .status(400)

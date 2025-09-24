@@ -18,6 +18,7 @@
     "DELETED": "تم حذف الكتاب بالمعرف {{id}} بنجاح",
     "VALIDATION": {
       "TITLE_REQUIRED": "العنوان مطلوب",
+      "AUTHOR_REQUIRED": "المؤلف مطلوب",
       "AUTHOR_ARRAY": "يجب أن يكون المؤلف مصفوفة من السلاسل النصية",
       "AUTHOR_MIN": "يجب أن يكون هناك مؤلف واحد على الأقل",
       "ISBN_REQUIRED": "رقم ISBN مطلوب",
