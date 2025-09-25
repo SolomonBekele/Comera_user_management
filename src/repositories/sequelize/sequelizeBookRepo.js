@@ -1,4 +1,4 @@
-import { Book as BookModel } from "../../model/sequelize/bookModelSequelize.js";
+import  BookModel  from "./db/models/bookModelSequelize.js";
 
 // ---- CREATE BOOK ----
 export const createBookRepo = async (bookData) => {

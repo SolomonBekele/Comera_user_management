@@ -1,6 +1,6 @@
-import * as fileRepo from "./fileUserRepo.js";
-import * as mysqlRepo from "./mysqlUserRepo.js";
-import * as sequelizeRepo from "./sequelizeUserRepo.js";
+import * as fileRepo from "./file-storage/fileBookRepo.js";
+import * as mysqlRepo from "./mysql/mysqlBookRepo.js";
+import * as sequelizeRepo from "./sequelize/sequelizeBookRepo.js";
 
 const STORAGE_TYPE = process.env.STORAGE_TYPE || "file";
 

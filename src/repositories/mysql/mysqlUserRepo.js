@@ -1,4 +1,4 @@
-import pool from "../../config/db/mysqlConfig.js";
+import pool from "./config/dbConfig.js";
 
 export const createUser = async (user) => {
   const sql = `INSERT INTO users 

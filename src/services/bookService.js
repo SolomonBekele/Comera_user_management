@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
-import Book from "../model/bookModel.js";
-import  bookRepo from "../Repositories/books/bookRepo.js";
+import Book from "../entity/Book.js";
+import  bookRepo from "../repositories/bookRepo.js";
 
 // ---- CREATE BOOK ----
 export const createBookService = async (bookData) => {

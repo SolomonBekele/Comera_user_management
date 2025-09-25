@@ -1,4 +1,4 @@
-import userRepo from "../repositories/users/userRepo.js";
+import userRepo from "../repositories/userRepo.js";
 
 // ---- GET ALL USERS ----
 export const getAllUsersService = async () => {
