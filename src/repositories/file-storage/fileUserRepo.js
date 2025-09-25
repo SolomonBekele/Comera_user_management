@@ -1,4 +1,4 @@
-import { readUsersFile, writeUsersFile } from "../../config/userConfig/userFileHanler.js";
+import { readUsersFile, writeUsersFile } from "../file-storage/config/userConfig/userFileHanler.js";
 
 export const createUser = async (user) => {
   const usersData = await readUsersFile();

@@ -1,4 +1,4 @@
-import pool from "../../config/db/mysqlConfig.js";
+import pool from "./config/dbConfig.js";
 
 // ---- CREATE BOOK ----
 export const createBookRepo = async (bookData) => {

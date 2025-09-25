@@ -1,6 +1,5 @@
 import { Sequelize } from "sequelize";
 
-const STORAGE_TYPE = process.env.STORAGE_TYPE || "file";
 
 let sequelize = null;
 

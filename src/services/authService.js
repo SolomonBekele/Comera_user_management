@@ -1,7 +1,7 @@
-import { readUsersFile, writeUsersFile } from "../config/userConfig/userFileHanler.js";
-import User from "../model/usersModel.js";
+
+import User from "../entity/Book.js";
 import { v4 as uuidv4 } from 'uuid';
-import userRepo from "../repositories/users/userRepo.js";
+import userRepo from "../repositories/userRepo.js";
 
 const STORAGE_TYPE = process.env.STORAGE_TYPE || "file"; // "file" or "mysql"
 

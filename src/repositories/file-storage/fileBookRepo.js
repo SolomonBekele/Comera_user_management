@@ -1,4 +1,4 @@
-import { readBooksFile, writeBooksFile } from "../../config/bookConfig/bookFileHandler.js";
+import { readBooksFile, writeBooksFile } from "../file-storage/config/bookConfig/bookFileHandler.js";
 
 // ---- CREATE BOOK ----
 export const createBookRepo = async (bookData) => {

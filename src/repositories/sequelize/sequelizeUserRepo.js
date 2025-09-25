@@ -1,4 +1,4 @@
-import { User as UserModel } from "../../model/sequelize/userModelSequelize.js";
+import {User as UserModel}  from "./db/models/userModelSequelize.js";
 
 export const createUser = async (user) => {
   return await UserModel.create(user);
