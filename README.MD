@@ -11,12 +11,17 @@ A Node.js and Express-based project demonstrating MVC architecture with controll
 project/
 ├── src/
 │   ├── controllers/     # Handles HTTP requests and responses
+│   ├── dto/             # Handles data tranfers
+│   ├── entity/          # Sequelize models or entity definitions
+│.  ├── errorHandler/    # Custom error handling middleware
+│.  ├── i18n/            # Internationalization and localization files
+│   ├── repositories/    # Database access layer (CRUD operations)
 │   ├── services/        # Business logic
 │   ├── models/          # Data models (if using DB)
 │   ├── routes/          # API routes
 │   ├── config/          # Utilities and setup (e.g., fileHandler)
 |   |     ├── data       # Stores user.txt
-│   └── app.js           # Main application entry
+│   └── index.js           # Main application entry
 ├── package.json
 └── README.md
 ```
