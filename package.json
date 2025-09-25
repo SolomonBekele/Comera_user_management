@@ -12,6 +12,7 @@
     "dev": "nodemon src/index.js",
 
     "migrate:init": "npx sequelize-cli init",
+    "migrate:model": "npx sequelize-cli model:generate --name",
     "migration:generate": "npx sequelize-cli migration:generate --name",
     "migrate:up": "npx sequelize-cli db:migrate",
     "migrate:undo": "npx sequelize-cli db:migrate:undo",

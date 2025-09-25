@@ -1,5 +1,5 @@
 
-import User from "../entity/Book.js";
+import User from "../entity/User.js";
 import { v4 as uuidv4 } from 'uuid';
 import userRepo from "../repositories/userRepo.js";
 

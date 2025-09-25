@@ -1,7 +1,8 @@
 import {User as UserModel}  from "./db/models/userModelSequelize.js";
 
 export const createUser = async (user) => {
-  return await UserModel.create(user);
+  const created_user = await UserModel.create(user);
+  return created_user ? created_user.dataValues :null;
 };
 
 export const getAllUsersRepo = async () => {
