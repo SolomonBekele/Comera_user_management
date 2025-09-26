@@ -1,4 +1,4 @@
-import {User as UserModel}  from "./db/models/userModelSequelize.js";
+import UserModel   from "./db/models/userModelSequelize.js";
 
 export const createUser = async (user) => {
   const created_user = await UserModel.create(user);
@@ -56,3 +56,5 @@ export const changeLibrarianStatusRepo = async (id, status) => {
   await user.save();
   return true;
 };
+
+

@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../../config/sequelize.js";
 
-export const User = sequelize.define("User", {
+const User = sequelize.define("User", {
   id: {
     type: DataTypes.STRING,
     primaryKey: true,
@@ -13,8 +13,9 @@ export const User = sequelize.define("User", {
   role: DataTypes.STRING,
   language: DataTypes.STRING,
   status: DataTypes.STRING,
-  created_at: DataTypes.DATE,
 }, {
   tableName: "users",
   timestamps: false,
 });
+
+export default User;
