@@ -45,3 +45,7 @@ export const getUserBorrowingsService = async (userId) => {
   return await borrowRepo.getUserBorrowingsWithDetailsRepo(userId);
 };
 
+// ----  to fetch books borrowed on a specific date ----
+export const getBooksBorrowedOnDateService = async (date) => {
+  return await borrowRepo.getBooksBorrowedOnDateRepo(date);
+};
