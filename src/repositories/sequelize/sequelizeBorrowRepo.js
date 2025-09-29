@@ -1,23 +1,53 @@
 
-import {User as UserBorrowedModel,Book as BookBorrowedModel} from "./db/models/borrowingModelSequelize.js";
+import {User ,Book,Borrowing} from "./db/models/borrowingModelSequelize.js";
 import  UserModel  from "./db/models/userModelSequelize.js";
 import  BookModel  from "./db/models/bookModelSequelize.js";
 
-// ---- Add a borrowing record ----
+import sequelize from "./config/sequelize.js"; // your Sequelize instance
+
+// ---- Add a borrowing record with transaction ----
 export const addBorrowingRepo = async (userId, bookId) => {
-  const user = await UserBorrowedModel.findByPk(userId);
-  const book = await BookBorrowedModel.findByPk(bookId);
+  const t = await sequelize.transaction();
 
-  if (!user || !book) {
-    throw new Error("User or Book not found");
+  try {
+    const user = await User.findByPk(userId, { transaction: t });
+    const book = await Book.findByPk(bookId, { transaction: t });
+
+    if (!user || !book) {
+      throw new Error("User or Book not found");
+    }
+
+    if (book.isBorrowed) {
+      throw new Error("Book is already borrowed");
+    }
+
+    // Add borrowing record
+    // const addBorrowedBook= await user.addBorrowedBook(book, {
+    //   through: { borrow_date: new Date() },
+    //   transaction: t,
+    // });
+    await Borrowing.create(
+      {
+        userId,
+        bookId,
+        borrowDate: new Date(),
+        returnDate: null,
+      },
+      { transaction: t }
+    );
+
+    // Update book status
+    await book.update({ isBorrowed: true }, { transaction: t });
+
+    // Commit transaction
+    await t.commit();
+    return true;
+  } catch (error) {
+    await t.rollback();
+    throw error;
   }
-
-  await user.addBorrowedBook(book, {
-    through: { borrow_date: new Date() },
-  });
-
-  return true;
 };
+
 
 // ---- Find all users who borrowed a specific book ----
 export const getUsersByBookIdRepo = async (bookId) => {
@@ -46,3 +76,121 @@ export const getBooksByUserIdRepo = async (userId) => {
 //   console.log("uuYuuu",user.toJSON());
   return user ? user.borrowedBooks : [];
 };
+
+
+// ---- Return a borrowed book ----
+export const returnBorrowingRepo = async (userId, bookId) => {
+  const t = await sequelize.transaction();
+
+  try {
+
+    const user = await UserBorrowedModel.findByPk(userId, { transaction: t });
+    const book = await BookBorrowedModel.findByPk(bookId, { transaction: t });
+
+    if (!user || !book) {
+      throw new Error("User or Book not found");
+    }
+
+    if (!book.isBorrowed) {
+      throw new Error("Book is not currently borrowed");
+    }
+
+    // Find borrowing record
+    const borrowing = await Borrowing.findOne({
+      where: { userId, bookId, returnDate: null },
+      transaction: t,
+    });
+
+    if (!borrowing) {
+      throw new Error("Borrowing record not found or already returned");
+    }
+
+    // Update borrowing record with return date
+    await borrowing.update({ returnDate: new Date() }, { transaction: t });
+
+    // Update book status to available
+    await book.update({ isBorrowed: false }, { transaction: t });
+
+    await t.commit();
+    return true;
+  } catch (error) {
+    await t.rollback();
+    throw error;
+  }
+};
+
+export const getBookHistoryByBookIdRepo = async (bookId) => {
+  return await Borrowing.findAll({
+    where: { bookId },
+    order: [["borrow_date", "DESC"]],
+    include: [
+      {
+        model: User,
+        attributes: [], // exclude default nested object
+      },
+      {
+        model: Book,
+        attributes: [], // exclude default nested object
+      },
+    ],
+    attributes: [
+      "id",
+      "borrow_date",
+      "return_date",
+      [sequelize.literal("CONCAT(User.first_name, ' ', User.last_name)"), "userName"]
+      [sequelize.col("Book.title"), "bookTitle"],
+    ],
+    raw: true, // flatten the result
+  });
+};
+
+export const getAllBorrowingsWithDetailsRepo = async ()=> {
+  const borrowings = await sequelize.query(
+    `
+    SELECT 
+      b.id AS borrowingId,
+      u.first_name AS userName,
+      bk.title AS bookName,
+      b.borrowDate,
+      b.returnDate
+    FROM borrowings b
+    JOIN users u ON b.userId = u.id
+    JOIN books bk ON b.bookId = bk.id
+    ORDER BY b.borrowDate DESC
+    `,
+    {
+      model: Borrowing,   // Map base to Borrowing model
+      mapToModel: false,  // keep raw format (otherwise mismatch with Borrowing schema)
+      type: sequelize.QueryTypes.SELECT,
+    }
+  );
+
+  return borrowings;
+}
+
+export const getActiveBorrowingsWithDetailsRepo = async () => {
+  const borrowings = await sequelize.query(
+    `
+    SELECT 
+      b.id AS borrowingId,
+      CONCAT(u.first_name, ' ', u.last_name) AS userName,
+      bk.title AS bookName,
+      bk.isbn As bookIsbn,
+      b.borrowDate,
+      b.returnDate
+    FROM borrowings b
+    JOIN users u ON b.userId = u.id
+    JOIN books bk ON b.bookId = bk.id
+    WHERE b.returnDate IS NULL
+    ORDER BY b.borrowDate DESC
+    `,
+    {
+      type: sequelize.QueryTypes.SELECT,
+    }
+  );
+
+  return borrowings;
+};
+
+
+   

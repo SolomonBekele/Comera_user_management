@@ -36,10 +36,15 @@ const Book = sequelize.define("Book",{
       type: DataTypes.STRING,
       allowNull: true,
     },
+    isBorrowed: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
   },
   {
     tableName: "books",
-    timestamps: true, // set to true if you want createdAt/updatedAt
+    timestamps: true, 
   }
 );
 
