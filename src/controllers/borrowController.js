@@ -1,5 +1,6 @@
 import {addBorrowingService,getBookHistoryByBookIdService,getBooksByUserIdService,getUsersByBookIdService, returnBorrowingService
-  ,getAllBorrowingsWithDetailsService,getActiveBorrowingsWithDetailsService,getUsersBorrowCountService,getUserBorrowingsService} from "../services/borrowService.js";
+  ,getAllBorrowingsWithDetailsService,getActiveBorrowingsWithDetailsService,getUsersBorrowCountService,getUserBorrowingsService,
+getBooksBorrowedOnDateService} from "../services/borrowService.js";
 
 // ---- create a new borrowing record ----
 export const addBookBorrowing = async (req, res) => {
@@ -143,6 +144,32 @@ export const getUserBorrowingsHistory = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Failed to fetch user borrowings",
+    });
+  }
+};
+
+// ---- Controller: Fetch books borrowed on a specific date ----
+export const getBooksBorrowedOnDate = async (req, res) => {
+  try {
+    const { date } = req.query; // date from query param e.g., /books/borrowed?date=2025-09-29
+    if (!date) {
+      return res.status(400).json({ message: "Date is required" });
+    }
+
+    const books = await getBooksBorrowedOnDateService(date);
+
+    if (!books.length) {
+      return res.status(404).json({ message: `No books borrowed on ${date}` });
+    }
+
+    res.status(200).json({
+      message: `Books borrowed on ${date}: ${books.length}`,
+      data: books,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to fetch books borrowed on specific date",
+      error: error.message,
     });
   }
 };

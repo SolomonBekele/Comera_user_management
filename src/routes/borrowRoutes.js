@@ -1,6 +1,7 @@
 import express from "express"
 import {addBookBorrowing, getAllBorrowingsWithDetails, getBookHistoryByBookId, getBooksByUserId,getUsersByBookId
-    , returnBookBorrowing,getActiveBorrowingsWithDetails,getUsersBorrowCount ,getUserBorrowingsHistory} from "../controllers/borrowController.js"
+    , returnBookBorrowing,getActiveBorrowingsWithDetails,getUsersBorrowCount ,getUserBorrowingsHistory,
+getBooksBorrowedOnDate} from "../controllers/borrowController.js"
 import protectRoute from "../middlewares/protectRoute.js";
 import authorizeRoles from "../middlewares/authorizeRole.js";
 import checkIdMatcher from "../middlewares/checkIdMatcher.js";
@@ -21,4 +22,5 @@ router.get("/active",protectRoute,authorizeRoles('LIBRARIAN'),getActiveBorrowing
 router.get("/count",protectRoute,authorizeRoles('LIBRARIAN'),getUsersBorrowCount)
 router.get("/user/history/:id",protectRoute,getUserBorrowingsHistory)
 router.get("/user/self-history",protectRoute,getUserBorrowingsHistory)
+router.get("/borrowed-books/date",protectRoute,authorizeRoles('LIBRARIAN'), getBooksBorrowedOnDate);
 export default router;

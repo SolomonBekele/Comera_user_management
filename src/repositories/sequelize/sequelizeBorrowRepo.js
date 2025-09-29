@@ -1,9 +1,10 @@
-
+import { Op } from "sequelize";
 import {User ,Book,Borrowing} from "./db/models/borrowingModelSequelize.js";
 import  UserModel  from "./db/models/userModelSequelize.js";
 import  BookModel  from "./db/models/bookModelSequelize.js";
 
 import sequelize from "./config/sequelize.js"; // your Sequelize instance
+
 
 // ---- Add a borrowing record with transaction ----
 export const addBorrowingRepo = async (userId, bookId) => {
@@ -280,6 +281,29 @@ ORDER BY
   return borrowings;
 };
 
+// Fetch books borrowed on a specific date
+export const getBooksBorrowedOnDateRepo = async (date) => {
+  return await Book.findAll({
+    include: [
+      {
+        model: User,
+        as: "borrowers",
+        through: {
+          model: Borrowing,
+          where: {
+            borrowDate: {
+              [Op.gte]: new Date(date + " 00:00:00"),
+              [Op.lte]: new Date(date + " 23:59:59"),
+            },
+          },
+          attributes: [], // don’t include Borrowing fields unless needed
+        },
+        attributes: ["first_name", "last_name"], // borrower details if you want
+        required: true, // ✅ ensures only books that match are returned
+      },
+    ],
+  });
+};
 
 
 
