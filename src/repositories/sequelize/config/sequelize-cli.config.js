@@ -11,13 +11,13 @@ export default {
     dialect: "mysql",
 
     // Use a different storage type. Default: sequelize
-    migrationStorage: "json",
+    // migrationStorage: "json",
 
     // Use a different file name. Default: sequelize-meta.json
-    migrationStoragePath: "sequelizeMeta.json",
+    // migrationStoragePath: "sequelizeMeta.json",
 
     // Use a different table name. Default: SequelizeMeta
-    migrationStorageTableName: "sequelize_meta",
+    // migrationStorageTableName: "sequelize_meta",
   },
   test: {
     username: process.env.DB_USER || "root",

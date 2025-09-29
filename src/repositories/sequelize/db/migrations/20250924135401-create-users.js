@@ -20,9 +20,20 @@
     createdAt: { type: Sequelize.DATE, defaultValue: Sequelize.NOW },
     updatedAt: {type: Sequelize.DATE}
   });
+
+  await queryInterface.addIndex('users', ['status'], {
+    name: 'idx_user_status',
+  });
+
+  await queryInterface.addIndex('users', ['email'], {
+    name: 'idx_user_email',
+  });
+
   }
 
  export async function down (queryInterface, Sequelize) {
+    await queryInterface.removeIndex("users", "idx_user_status");
+    await queryInterface.removeIndex("users", "idx_user_email");
     await queryInterface.dropTable('users');
   }
 

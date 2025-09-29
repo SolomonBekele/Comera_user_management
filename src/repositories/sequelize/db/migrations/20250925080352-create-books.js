@@ -40,7 +40,7 @@ export async function up(queryInterface, Sequelize) {
     isBorrowed:{
       type: Sequelize.BOOLEAN,
       allowNull: false,
-      defaultValue: true,
+      defaultValue: false,
     },
     createdAt: {
       type: Sequelize.DATE,
@@ -51,8 +51,13 @@ export async function up(queryInterface, Sequelize) {
       type: Sequelize.DATE,
     },
   });
+
+  await queryInterface.addIndex('books', ['isbn'], {
+    name: 'idx_book_isbn',
+  });
 }
 
 export async function down(queryInterface) {
+  await queryInterface.removeIndex("books", "idx_book_isbn");
   await queryInterface.dropTable("books");
 }

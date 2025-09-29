@@ -84,8 +84,8 @@ export const returnBorrowingRepo = async (userId, bookId) => {
 
   try {
 
-    const user = await UserBorrowedModel.findByPk(userId, { transaction: t });
-    const book = await BookBorrowedModel.findByPk(bookId, { transaction: t });
+    const user = await User.findByPk(userId, { transaction: t });
+    const book = await Book.findByPk(bookId, { transaction: t });
 
     if (!user || !book) {
       throw new Error("User or Book not found");
@@ -119,30 +119,33 @@ export const returnBorrowingRepo = async (userId, bookId) => {
   }
 };
 
-export const getBookHistoryByBookIdRepo = async (bookId) => {
-  return await Borrowing.findAll({
-    where: { bookId },
-    order: [["borrow_date", "DESC"]],
-    include: [
-      {
-        model: User,
-        attributes: [], // exclude default nested object
-      },
-      {
-        model: Book,
-        attributes: [], // exclude default nested object
-      },
-    ],
-    attributes: [
-      "id",
-      "borrow_date",
-      "return_date",
-      [sequelize.literal("CONCAT(User.first_name, ' ', User.last_name)"), "userName"]
-      [sequelize.col("Book.title"), "bookTitle"],
-    ],
-    raw: true, // flatten the result
-  });
-};
+// export const getBookHistoryByBookIdRepo = async (bookId) => {
+//   console.log("object");
+//   return await Borrowing.findAll({
+//     where: { bookId },
+//     order: [["borrow_date", "DESC"]],
+//     include: [
+//       {
+//         model: UserModel,
+//         as:"borrowers",
+//         attributes: [], 
+//       },
+//       {
+//         model: Book,
+//         as:"borrowedBooks",
+//         attributes: [], 
+//       },
+//     ],
+//     attributes: [
+//       "id",
+//       "borrow_date",
+//       "return_date",
+//       [sequelize.literal("CONCAT(user.first_name, ' ', user.last_name)"), "userName"]
+//       [sequelize.col("book.title"), "bookTitle"],
+//     ],
+//     raw: true, // flatten the result
+//   });
+// };
 
 export const getAllBorrowingsWithDetailsRepo = async ()=> {
   const borrowings = await sequelize.query(
@@ -191,6 +194,95 @@ export const getActiveBorrowingsWithDetailsRepo = async () => {
 
   return borrowings;
 };
+export const getUsersBorrowedBooksWithIsbnRepo = async () => {
+  const results = await sequelize.query(
+    `
+    SELECT 
+      u.id AS userId,
+      CONCAT(u.first_name, ' ', u.last_name) AS userName,
+      COUNT(b.id) AS borrowedBooksCount,
+      GROUP_CONCAT(CONCAT(bk.title, ' (', bk.isbn, ')') SEPARATOR ', ') AS borrowedBooks
+    FROM users u
+    JOIN borrowings b ON b.userId = u.id
+    JOIN books bk ON b.bookId = bk.id
+    WHERE b.returnDate IS NULL
+    GROUP BY u.id, u.first_name, u.last_name
+    ORDER BY borrowedBooksCount DESC
+    `,
+    {
+      type: sequelize.QueryTypes.SELECT,
+    }
+  );
+
+  // Optional: Convert borrowedBooks string to array
+  results.forEach(user => {
+    user.borrowedBooks = user.borrowedBooks ? user.borrowedBooks.split(', ') : [];
+  });
+
+  return results;
+};
+// Get all borrowings with user and book details for a specific user
+export const getBorrowedBookWithDetailsRepo = async (bookId) => {
+  const borrowings = await sequelize.query(
+    `
+    SELECT 
+  b.id AS borrowingId,
+  u.first_name AS userName,
+  bk.title AS bookName,
+  b.borrowDate,
+  b.returnDate
+FROM borrowings b
+JOIN books bk ON b.bookId = bk.id
+JOIN users u ON b.userId = u.id
+WHERE bk.id = :bookId
+ORDER BY 
+  b.returnDate IS NOT NULL,  -- NULLs first
+  b.borrowDate DESC;         -- then by borrowDate descending
+
+    `,
+    {
+      replacements: { bookId },  // safely bind parameter
+      model: Borrowing,
+      mapToModel: false,
+      type: sequelize.QueryTypes.SELECT,
+    }
+  );
+
+  return borrowings;
+};
+
+export const getUserBorrowingsWithDetailsRepo = async (userId) => {
+  const borrowings = await sequelize.query(
+    `
+    SELECT 
+  b.id AS borrowingId,
+  u.first_name AS userName,
+  bk.title AS bookName,
+  b.borrowDate,
+  b.returnDate
+FROM borrowings b
+JOIN users u ON b.userId = u.id
+JOIN books bk ON b.bookId = bk.id
+WHERE u.id = :userId
+ORDER BY 
+  b.returnDate IS NOT NULL,  -- NULLs first
+  b.borrowDate DESC;         -- then by borrowDate descending
+
+    `,
+    {
+      replacements: { userId },  // safely bind parameter
+      model: Borrowing,
+      mapToModel: false,
+      type: sequelize.QueryTypes.SELECT,
+    }
+  );
+
+  return borrowings;
+};
+
+
+
+
 
 
    
