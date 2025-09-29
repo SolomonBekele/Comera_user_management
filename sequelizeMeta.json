@@ -3,5 +3,6 @@
   "20250925080352-create-books.js",
   "20250926062212-create-borrows-table.js",
   "20250926063409-insert-users.js",
-  "20250926063415-insert-books.js"
+  "20250926063415-insert-books.js",
+  "20250926131741-modify-book-borrowed.js"
 ]
