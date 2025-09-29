@@ -16,6 +16,20 @@ const User = sequelize.define("User", {
 }, {
   tableName: "users",
   timestamps: false,
-});
+},
+{
+    indexes: [
+      {
+        name: "idx_user_status", // custom index name
+        fields: ["status"],       // column(s) to index
+      },
+      {
+        name: "idx_user_email",
+        unique: true,            
+        fields: ["email"], 
+      },
+    ],
+  }
+);
 
 export default User;

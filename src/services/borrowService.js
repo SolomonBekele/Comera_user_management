@@ -20,17 +20,28 @@ export const returnBorrowingService = async (userId, bookId) => {
 
 // ---- return a borrowing record ----
 export const getBookHistoryByBookIdService = async ( bookId) => {
-  return await borrowRepo.getBookHistoryByBookIdRepo(bookId);
+  return await borrowRepo.getBorrowedBookWithDetailsRepo(bookId);
 };
 
 
-// ---- return a All borrowing History record ----
+// ---- return  All borrowing History record ----
 export const getAllBorrowingsWithDetailsService = async () => {
   return await borrowRepo.getAllBorrowingsWithDetailsRepo();
 };
 
 
-// ---- return a All borrowing History record ----
+// ---- return  All active borrowing History record ----
 export const getActiveBorrowingsWithDetailsService = async () => {
   return await borrowRepo.getActiveBorrowingsWithDetailsRepo();
 };
+
+// ---- return a count user borrowers record ----
+export const getUsersBorrowCountService = async () => {
+  return await borrowRepo.getUsersBorrowedBooksWithIsbnRepo();
+};
+
+// ---- return all borrowings with user and book details for a specific user ----
+export const getUserBorrowingsService = async (userId) => {
+  return await borrowRepo.getUserBorrowingsWithDetailsRepo(userId);
+};
+

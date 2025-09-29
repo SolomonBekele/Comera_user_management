@@ -22,6 +22,8 @@
     "seed:undo": "npx sequelize-cli db:seed:undo",
     "seed:undo:all": "npx sequelize-cli db:seed:undo:all",
     "seed:undo:specific": "npx sequelize-cli db:seed:undo --seed",
+    "migrate:status": "npx sequelize-cli db:migrate:status",
+
 
     "fly-migrate": "docker compose run --rm flyway",
     "fly-info": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root info",
