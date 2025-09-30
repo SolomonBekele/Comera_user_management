@@ -13,7 +13,7 @@ export const signUpService = async ( first_name,last_name, email, password,role,
         const created_at = new Date()
         const newUser = new User(id, first_name, last_name,email, password, role,language,status,created_at);
         const registeredUser = await userRepo.createUser(newUser);
-        return registeredUser.dataValues;
+        return registeredUser;
     }
     catch(err){
         throw new Error("error on createUserService " + err)
