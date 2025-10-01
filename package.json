@@ -10,21 +10,18 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-
     "migrate:init": "npx sequelize-cli init",
     "migrate:model": "npx sequelize-cli model:generate --name",
     "migration:generate": "npx sequelize-cli migration:generate --name",
     "migrate:up": "npx sequelize-cli db:migrate",
     "migrate:undo": "npx sequelize-cli db:migrate:undo",
     "migrate:undo:all": "npx sequelize-cli db:migrate:undo:all",
-    "seed:generate":"npx sequelize-cli seed:generate --name",
+    "seed:generate": "npx sequelize-cli seed:generate --name",
     "seed": "npx sequelize-cli db:seed:all",
     "seed:undo": "npx sequelize-cli db:seed:undo",
     "seed:undo:all": "npx sequelize-cli db:seed:undo:all",
     "seed:undo:specific": "npx sequelize-cli db:seed:undo --seed",
     "migrate:status": "npx sequelize-cli db:migrate:status",
-
-
     "fly-migrate": "docker compose run --rm flyway",
     "fly-info": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root info",
     "fly-clean": "docker compose run --rm flyway -url=jdbc:mysql://db:3306/user_db -user=root -password=root  -cleanDisabled=false clean",
@@ -32,15 +29,18 @@
   },
   "dependencies": {
     "argon2": "^0.44.0",
+    "colors": "^1.4.0",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "i18n": "^0.15.1",
     "joi": "^18.0.1",
     "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.1",
     "mysql2": "^3.15.0",
     "nodemon": "^3.1.10",
     "sequelize": "^6.37.7",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "winston": "^3.18.1"
   },
   "devDependencies": {
     "sequelize-cli": "^6.6.3"
