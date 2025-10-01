@@ -1,5 +1,18 @@
+import { Client } from "@elastic/elasticsearch";
 import winston from "winston";
+import { ElasticsearchTransport } from "winston-elasticsearch";
 import morgan from "morgan";
+
+// Elasticsearch client
+const esClient = new Client({ node: "http://localhost:9200" });
+
+// Winston Elasticsearch transport
+const esTransportOpts = {
+  level: "info", // minimum log level to send
+  client: esClient,
+  indexPrefix: "app-logs", // logs will go into indices like app-logs-2025.10.01
+};
+
 
 const logger = winston.createLogger({
   level: process.env.NODE_ENV === "production" ? "info" : "debug",
@@ -22,6 +35,7 @@ const logger = winston.createLogger({
     new winston.transports.File({ filename: "combined.log", format: winston.format.combine(
       winston.format.printf(({ level, message, timestamp, stack }) => `${timestamp} [${level}]: ${stack || message}`)
     )}),
+    new ElasticsearchTransport(esTransportOpts),
   ],
 });
 
