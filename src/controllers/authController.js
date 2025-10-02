@@ -95,6 +95,9 @@ export const login = async (req, res) => {
 // ==================== LOGOUT ====================
 export const logout = (req, res) => {
   logger.info(`User logged out -> id=${req.user?.id || "unknown"}`);
+  logger.info("Server started on port 5000", { service: "user-service" });
+  logger.warn("Low disk space", { disk: "/dev/sda1" });
+  logger.error("Database connection failed", { db: "mysql" });
   res.json({ message: i18n.__("USER.LOGOUT_SUCCESS") });
 };
 
