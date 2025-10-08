@@ -1,0 +1,2 @@
+FROM flyway/flyway:9.21.1-alpine
+COPY ./fly-migrations /flyway/sql
