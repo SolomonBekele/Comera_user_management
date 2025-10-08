@@ -4,10 +4,6 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile.mysql
     plan: free
-    disk:
-      name: mysqldata
-      mountPath: /var/lib/mysql
-      sizeGB: 1
     envVars:
       - key: MYSQL_ROOT_PASSWORD
         value: root
@@ -19,8 +15,6 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile.flyway
     plan: free
-    startCommand: >
-      flyway -url=jdbc:mysql://user-db:3306/user_db -user=root -password=root migrate
 
   - type: web
     name: elasticsearch

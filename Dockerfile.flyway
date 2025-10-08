@@ -1,2 +1,2 @@
 FROM flyway/flyway:9.21.1-alpine
-COPY ./fly-migrations /flyway/sql
+CMD ["-url=jdbc:mysql://user-db:3306/user_db", "-user=root", "-password=root", "migrate"]
