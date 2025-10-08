@@ -1,0 +1,62 @@
+services:
+  - type: web
+    name: node-app
+    env: docker
+    dockerfilePath: ./render/Dockerfile.node
+    plan: free
+    ports:
+      - 3003
+    envVars:
+      - key: DATABASE_URL
+        value: mysql://root:root@user-db:3306/user_db
+
+  - type: web
+    name: user-db
+    env: docker
+    dockerfilePath: ./render/Dockerfile.mysql
+    plan: free
+    disk:
+      name: mysqldata
+      mountPath: /var/lib/mysql
+      sizeGB: 1
+    envVars:
+      - key: MYSQL_ROOT_PASSWORD
+        value: root
+      - key: MYSQL_DATABASE
+        value: user_db
+    ports:
+      - 3306
+
+  - type: worker
+    name: flyway
+    env: docker
+    dockerfilePath: ./render/Dockerfile.flyway
+    plan: free
+    startCommand: >
+      flyway -url=jdbc:mysql://user-db:3306/user_db -user=root -password=root migrate
+
+  - type: web
+    name: elasticsearch
+    env: docker
+    dockerfilePath: ./render/Dockerfile.elasticsearch
+    plan: free
+    ports:
+      - 9200
+    envVars:
+      - key: discovery.type
+        value: single-node
+      - key: ES_JAVA_OPTS
+        value: "-Xms512m -Xmx512m"
+      - key: xpack.security.enabled
+        value: "false"
+
+  - type: web
+    name: kibana
+    env: docker
+    dockerfilePath: ./render/Dockerfile.kibana
+    plan: free
+    ports:
+      - 5601
+    envVars:
+      - key: ELASTICSEARCH_HOSTS
+        value: http://elasticsearch:9200

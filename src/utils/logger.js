@@ -12,7 +12,7 @@ if (!fs.existsSync(logDir)) {
 }
 
 // Elasticsearch client
-const esClient = new Client({ node: "http://localhost:9200" });
+const esClient = new Client({ node: process.env.ELASTICSEARCH || "http://localhost:9200" });
 
 // Winston Elasticsearch transport
 const esTransportOpts = {

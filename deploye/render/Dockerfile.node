@@ -1,0 +1,15 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy package files from parent folder
+COPY ../package.json ../package-lock.json ./
+RUN npm install
+
+# Copy the rest of the app
+COPY ../src ./src
+COPY ../fly-migrations ./fly-migrations
+
+EXPOSE 3003
+
+CMD ["npm", "run", "dev"]
