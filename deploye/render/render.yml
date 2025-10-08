@@ -1,8 +1,19 @@
 services:
   - type: web
+    name: node-app
+    env: docker
+    dockerfilePath: ./render/Dockerfile.node
+    plan: free
+    ports:
+      - 3003
+    envVars:
+      - key: DATABASE_URL
+        value: mysql://root:root@user-db:3306/user_db
+
+  - type: web
     name: user-db
     env: docker
-    dockerfilePath: ./Dockerfile.mysql
+    dockerfilePath: ./render/Dockerfile.mysql
     plan: free
     disk:
       name: mysqldata
@@ -19,7 +30,7 @@ services:
   - type: worker
     name: flyway
     env: docker
-    dockerfilePath: ./Dockerfile.flyway
+    dockerfilePath: ./render/Dockerfile.flyway
     plan: free
     startCommand: >
       flyway -url=jdbc:mysql://user-db:3306/user_db -user=root -password=root migrate
@@ -27,7 +38,7 @@ services:
   - type: web
     name: elasticsearch
     env: docker
-    dockerfilePath: ./Dockerfile.elasticsearch
+    dockerfilePath: ./render/Dockerfile.elasticsearch
     plan: free
     ports:
       - 9200
@@ -42,7 +53,7 @@ services:
   - type: web
     name: kibana
     env: docker
-    dockerfilePath: ./Dockerfile.kibana
+    dockerfilePath: ./render/Dockerfile.kibana
     plan: free
     ports:
       - 5601
