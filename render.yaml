@@ -1,0 +1,51 @@
+services:
+  - type: web
+    name: user-nodeapp
+    env: docker
+    dockerfilePath: ./deploye/render/Dockerfile.node
+    plan: free
+    envVars:
+      - key: PORT
+        value: 3003
+      - key: MYSQL_HOST
+        value: user-db
+      - key: MYSQL_USER
+        value: root
+      - key: MYSQL_PASSWORD
+        value: root
+      - key: MYSQL_DATABASE
+        value: user_db
+      - key: ELASTICSEARCH_URL
+        value: http://elasticsearch:9200
+  - type: web
+    name: user-db
+    env: docker
+    dockerfilePath: ./deploye/render/Dockerfile.mysql
+    plan: free
+    envVars:
+      - key: MYSQL_ROOT_PASSWORD
+        value: root
+      - key: MYSQL_DATABASE
+        value: user_db
+
+  - type: web
+    name: elasticsearch
+    env: docker
+    dockerfilePath: ./deploye/render/Dockerfile.elasticsearch
+    plan: free
+    envVars:
+      - key: discovery.type
+        value: single-node
+      - key: ES_JAVA_OPTS
+        value: "-Xms512m -Xmx512m"
+      - key: xpack.security.enabled
+        value: "false"
+
+  - type: web
+    name: kibana
+    env: docker
+    dockerfilePath: ./deploye/render/Dockerfile.kibana
+    plan: free
+    envVars:
+      - key: ELASTICSEARCH_HOSTS
+        value: http://elasticsearch:9200
