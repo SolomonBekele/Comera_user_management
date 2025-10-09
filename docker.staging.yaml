@@ -21,6 +21,7 @@ services:
 
   app-staging:
     build: .
+    image: solomonbekele/user-management-system:2.0 
     container_name: node-app-staging
     restart: on-failure
     ports:
