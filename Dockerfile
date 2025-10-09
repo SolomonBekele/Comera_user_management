@@ -9,4 +9,5 @@ COPY . .
 
 EXPOSE 3003
 
-CMD ["npm", "run","dev"]
+CMD ["sh", "-c", "npx sequelize-cli db:migrate && npm run dev"]
+
