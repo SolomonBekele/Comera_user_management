@@ -36,6 +36,3 @@ docker.staging.yaml
 dist
 build
 
-# Temporary files
-*.tmp
-*.swp
