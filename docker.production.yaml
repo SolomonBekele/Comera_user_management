@@ -1,0 +1,104 @@
+version: "3.9"
+
+services:
+  user-db-prod:
+    image: mysql:8.0
+    container_name: user-db-prod
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: user_db
+    ports:
+      - "3307:3306"   # host port incremented
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -proot"]
+      interval: 5s
+      retries: 10
+    volumes:
+      - mysqldata-prod:/var/lib/mysql
+    networks:
+      - backend-prod
+
+  node-app-prod:
+    build: .
+    container_name: node-app-prod
+    restart: always
+    ports:
+      - "3004:3003"   # host port incremented
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=user-db-prod
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=user_db
+      - PORT=3003
+      - JWT_SECRET=USER_SECRET
+      - REFRESH_SECRET=USER_REFRESH_SECRET
+      - STORAGE_TYPE=sequelize
+      - RUN_MIGRATIONS=true
+      - RUN_SEEDS=false
+    depends_on:
+      user-db-prod:
+        condition: service_healthy
+    networks:
+      - backend-prod
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    command: >
+      sh -c "
+        echo 'Waiting for database to be ready...' &&
+        until nc -z user-db-prod 3306; do sleep 2; done &&
+        echo 'Database is ready!' &&
+        npx sequelize-cli db:migrate &&
+        npm start
+      "
+
+  flyway-prod:
+    image: flyway/flyway:latest
+    depends_on:
+      user-db-prod:
+        condition: service_healthy
+    command: -url=jdbc:mysql://user-db-prod:3306/user_db -user=root -password=root migrate
+    volumes:
+      - ./fly-migrations:/flyway/sql
+    networks:
+      - backend-prod
+
+  elasticsearch-prod:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.14.0
+    container_name: elasticsearch-prod
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - xpack.security.enabled=false
+    ports:
+      - "9201:9200"   # host port incremented
+    networks:
+      - backend-prod
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200 || exit 1"]
+      interval: 30s
+      retries: 5
+
+  kibana-prod:
+    image: docker.elastic.co/kibana/kibana:8.14.0
+    container_name: kibana-prod
+    depends_on:
+      - elasticsearch-prod
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch-prod:9200
+    ports:
+      - "5602:5601"   # host port incremented
+    networks:
+      - backend-prod
+
+volumes:
+  mysqldata-prod:
+
+networks:
+  backend-prod:
+    driver: bridge

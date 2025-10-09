@@ -1,0 +1,41 @@
+# Node modules (we install inside container)
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Logs
+logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE/editor settings
+.vscode
+.idea
+*.sublime-project
+*.sublime-workspace
+
+# Docker files
+Dockerfile*
+docker-compose*.yml
+docker.production.yaml
+docker.staging.yaml
+
+# Build output
+dist
+build
+
+# Temporary files
+*.tmp
+*.swp
