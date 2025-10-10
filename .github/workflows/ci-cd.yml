@@ -1,27 +1,20 @@
-name: CI - CD Pipeline
-run-name: ${{ github.actor }} - ${{ github.sha }} - "${{ github.event.head_commit.message }}"
+name: CI/CD Pipeline
+
+run-name: ${{ github.actor }} - "${{ github.event.head_commit.message }}"
 
 on:
   push:
-    branches:  main
-  pull_request:
-    branches: main
+    branches: [ main, staging ]
 
 jobs:
-  build-check:
+  build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
-      - name: Check build
+      - name: Run build
         run: npm run build
