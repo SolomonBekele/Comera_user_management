@@ -1,7 +1,8 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../../config/sequelize.js";
-
-const Book = sequelize.define("Book",{
+let Book = null;
+if(process.env.STORAGE_TYPE ==="sequelize"){
+Book = sequelize.define("Book",{
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -47,5 +48,5 @@ const Book = sequelize.define("Book",{
     timestamps: true, 
   }
 );
-
+}
 export default Book;
