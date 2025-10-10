@@ -1,7 +1,9 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../../config/sequelize.js";
 
-const User = sequelize.define("User", {
+let User = null;
+if(process.env.STORAGE_TYPE ==="sequelize"){
+User = sequelize.define("User", {
   id: {
     type: DataTypes.STRING,
     primaryKey: true,
@@ -31,5 +33,5 @@ const User = sequelize.define("User", {
     ],
   }
 );
-
+}
 export default User;
