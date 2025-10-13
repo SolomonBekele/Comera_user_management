@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-app
+  namespace: user-management
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-app
+  template:
+    metadata:
+      labels:
+        app: user-app
+    spec:
+      containers:
+        - name: node-app
+          image: solomonbekele/user-management-system:2.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3003
+          env:
+            - name: NODE_ENV
+              value: staging
+            - name: DB_HOST
+              value: mysql
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_USER
+              value: root
+            - name: DB_PASSWORD
+              value: root
+            - name: DB_NAME
+              value: user_db
+            - name: PORT
+              value: "3003"
+            - name: JWT_SECRET
+              value: USER_SECRET
+            - name: REFRESH_SECRET
+              value: USER_REFRESH_SECRET
+            - name: STORAGE_TYPE
+              value: sequelize
+            - name: RUN_MIGRATIONS
+              value: "true"
+            - name: RUN_SEEDS
+              value: "true"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3003
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3003
+            initialDelaySeconds: 40
+            periodSeconds: 20
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-app-service
+  namespace: user-management
+spec:
+  selector:
+    app: user-app
+  ports:
+    - port: 3003
+      targetPort: 3003
+  type: ClusterIP
