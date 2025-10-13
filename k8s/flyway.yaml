@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: flyway-migrate
+  namespace: user-management
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: flyway
+          image: flyway/flyway:latest
+          command: ["flyway"]
+          args:
+            - -url=jdbc:mysql://mysql:3306/user_db
+            - -user=root
+            - -password=root
+            - migrate
+          volumeMounts:
+            - name: flyway-sql
+              mountPath: /flyway/sql
+      volumes:
+        - name: flyway-sql
+          hostPath:
+            path: /flyway/sql  # adjust or use ConfigMap if deploying remotely
